@@ -1,0 +1,6 @@
+framework module Pods_BigMama_BigMamaUITests {
+  umbrella header "Pods-BigMama-BigMamaUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
