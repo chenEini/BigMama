@@ -3,13 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27A94CC723CF73D5005B3B00 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A94CC623CF73D5005B3B00 /* LoginViewController.swift */; };
+		27A94CC923CF7439005B3B00 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A94CC823CF7439005B3B00 /* RegisterViewController.swift */; };
+		27A94CCB23CF758D005B3B00 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A94CCA23CF758D005B3B00 /* AddRecipeViewController.swift */; };
 		27F376E723C6310D00603AF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F376E623C6310D00603AF3 /* AppDelegate.swift */; };
 		27F376E923C6310D00603AF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F376E823C6310D00603AF3 /* SceneDelegate.swift */; };
-		27F376EB23C6310D00603AF3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F376EA23C6310D00603AF3 /* ViewController.swift */; };
+		27F376EB23C6310D00603AF3 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F376EA23C6310D00603AF3 /* RecipesViewController.swift */; };
 		27F376EE23C6310D00603AF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F376EC23C6310D00603AF3 /* Main.storyboard */; };
 		27F376F023C6310E00603AF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F376EF23C6310E00603AF3 /* Assets.xcassets */; };
 		27F376F323C6310E00603AF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F376F123C6310E00603AF3 /* LaunchScreen.storyboard */; };
@@ -40,10 +43,13 @@
 
 /* Begin PBXFileReference section */
 		04D4842318ACC2FDFBEDA997 /* Pods-BigMamaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigMamaTests.debug.xcconfig"; path = "Target Support Files/Pods-BigMamaTests/Pods-BigMamaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		27A94CC623CF73D5005B3B00 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		27A94CC823CF7439005B3B00 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		27A94CCA23CF758D005B3B00 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		27F376E323C6310D00603AF3 /* BigMama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigMama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F376E623C6310D00603AF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27F376E823C6310D00603AF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		27F376EA23C6310D00603AF3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		27F376EA23C6310D00603AF3 /* RecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		27F376ED23C6310D00603AF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27F376EF23C6310E00603AF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27F376F223C6310E00603AF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -103,7 +109,6 @@
 				04D4842318ACC2FDFBEDA997 /* Pods-BigMamaTests.debug.xcconfig */,
 				EAFFBC2C09D8EC18B278396E /* Pods-BigMamaTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -134,12 +139,15 @@
 			children = (
 				27F376E623C6310D00603AF3 /* AppDelegate.swift */,
 				27F376E823C6310D00603AF3 /* SceneDelegate.swift */,
-				27F376EA23C6310D00603AF3 /* ViewController.swift */,
 				27F376EC23C6310D00603AF3 /* Main.storyboard */,
 				27F376EF23C6310E00603AF3 /* Assets.xcassets */,
 				27F376F123C6310E00603AF3 /* LaunchScreen.storyboard */,
 				27F376F423C6310E00603AF3 /* Info.plist */,
 				27F3771623C6413D00603AF3 /* GoogleService-Info.plist */,
+				27F376EA23C6310D00603AF3 /* RecipesViewController.swift */,
+				27A94CCA23CF758D005B3B00 /* AddRecipeViewController.swift */,
+				27A94CC623CF73D5005B3B00 /* LoginViewController.swift */,
+				27A94CC823CF7439005B3B00 /* RegisterViewController.swift */,
 			);
 			path = BigMama;
 			sourceTree = "<group>";
@@ -412,7 +420,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27F376EB23C6310D00603AF3 /* ViewController.swift in Sources */,
+				27A94CCB23CF758D005B3B00 /* AddRecipeViewController.swift in Sources */,
+				27A94CC723CF73D5005B3B00 /* LoginViewController.swift in Sources */,
+				27A94CC923CF7439005B3B00 /* RegisterViewController.swift in Sources */,
+				27F376EB23C6310D00603AF3 /* RecipesViewController.swift in Sources */,
 				27F376E723C6310D00603AF3 /* AppDelegate.swift in Sources */,
 				27F376E923C6310D00603AF3 /* SceneDelegate.swift in Sources */,
 			);
