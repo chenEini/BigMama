@@ -7,3 +7,16 @@
 //
 
 import Foundation
+import Firebase
+
+class User {
+   
+    let id:String
+    var name: String = ""
+    
+    // Add Recipes Collection
+    
+    init(id:String){
+        self.id = id
+    }
+}

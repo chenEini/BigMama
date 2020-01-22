@@ -7,3 +7,18 @@
 //
 
 import Foundation
+import Firebase
+
+class Recipe {
+   
+    let id:String
+    var name:String = ""
+    var image:String = ""
+    var steps:String = ""
+    
+    // Add Belongs To User
+    
+    init(id:String){
+        self.id = id
+    }
+}
