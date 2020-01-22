@@ -10,6 +10,8 @@
 		27A94CC723CF73D5005B3B00 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A94CC623CF73D5005B3B00 /* LoginViewController.swift */; };
 		27A94CC923CF7439005B3B00 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A94CC823CF7439005B3B00 /* RegisterViewController.swift */; };
 		27A94CCB23CF758D005B3B00 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A94CCA23CF758D005B3B00 /* AddRecipeViewController.swift */; };
+		27EF2CA923D8A70600DB97F0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF2CA823D8A70600DB97F0 /* User.swift */; };
+		27EF2CAB23D8A73900DB97F0 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF2CAA23D8A73900DB97F0 /* Recipe.swift */; };
 		27F376E723C6310D00603AF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F376E623C6310D00603AF3 /* AppDelegate.swift */; };
 		27F376E923C6310D00603AF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F376E823C6310D00603AF3 /* SceneDelegate.swift */; };
 		27F376EB23C6310D00603AF3 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F376EA23C6310D00603AF3 /* RecipesViewController.swift */; };
@@ -46,6 +48,8 @@
 		27A94CC623CF73D5005B3B00 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		27A94CC823CF7439005B3B00 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		27A94CCA23CF758D005B3B00 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
+		27EF2CA823D8A70600DB97F0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		27EF2CAA23D8A73900DB97F0 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		27F376E323C6310D00603AF3 /* BigMama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigMama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F376E623C6310D00603AF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27F376E823C6310D00603AF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +116,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		27EF2CA723D8A5C600DB97F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				27EF2CA823D8A70600DB97F0 /* User.swift */,
+				27EF2CAA23D8A73900DB97F0 /* Recipe.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		27F376DA23C6310D00603AF3 = {
 			isa = PBXGroup;
 			children = (
@@ -137,11 +150,12 @@
 		27F376E523C6310D00603AF3 /* BigMama */ = {
 			isa = PBXGroup;
 			children = (
+				27EF2CA723D8A5C600DB97F0 /* Model */,
 				27F376E623C6310D00603AF3 /* AppDelegate.swift */,
 				27F376E823C6310D00603AF3 /* SceneDelegate.swift */,
 				27F376EC23C6310D00603AF3 /* Main.storyboard */,
-				27F376EF23C6310E00603AF3 /* Assets.xcassets */,
 				27F376F123C6310E00603AF3 /* LaunchScreen.storyboard */,
+				27F376EF23C6310E00603AF3 /* Assets.xcassets */,
 				27F376F423C6310E00603AF3 /* Info.plist */,
 				27F3771623C6413D00603AF3 /* GoogleService-Info.plist */,
 				27F376EA23C6310D00603AF3 /* RecipesViewController.swift */,
@@ -426,6 +440,8 @@
 				27F376EB23C6310D00603AF3 /* RecipesViewController.swift in Sources */,
 				27F376E723C6310D00603AF3 /* AppDelegate.swift in Sources */,
 				27F376E923C6310D00603AF3 /* SceneDelegate.swift in Sources */,
+				27EF2CA923D8A70600DB97F0 /* User.swift in Sources */,
+				27EF2CAB23D8A73900DB97F0 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
