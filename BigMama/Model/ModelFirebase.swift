@@ -14,18 +14,31 @@ class ModelFirebase {
     func addUser(user:User){
           
         let db = Firestore.firestore()
-            
-           let json = user.toJson();
-            db.collection("users").document(user.id).setData(json){
-                
-                err in
-              
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    print("Document successfully written!")
-                    // ModelEvents.StudentDataEvent.post();
-                }
+        let json = user.toJson();
+        db.collection("users").document(user.id).setData(json){
+            err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+                // ModelEvents.StudentDataEvent.post();
+            }
+        }
+    }
+    
+    func addRecipe(recipe:Recipe){
+          
+        let db = Firestore.firestore()
+        let json = recipe.toJson();
+        db.collection("recipes").document(recipe.id).setData(json){
+            err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+                // ModelEvents.StudentDataEvent.post();
+            }
         }
     }
 }
+

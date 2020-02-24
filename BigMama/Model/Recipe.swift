@@ -15,8 +15,7 @@ class Recipe {
     var name:String = ""
     var image:String = ""
     var steps:String = ""
-    
-    // Add Belongs To User
+    var lastUpdate: Int64?
     
     init(id:String){
         self.id = id
