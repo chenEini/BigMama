@@ -9,15 +9,17 @@
 import UIKit
 
 class RegisterViewController: UIViewController {
-    
+
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var pwd: UITextField!
 
+    @IBAction func register(_ sender: UIButton) {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
 
