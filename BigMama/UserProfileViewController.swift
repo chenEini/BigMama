@@ -12,6 +12,12 @@ class UserProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if(!Model.instance.isLoggedIn()){
+            let loginVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginViewController")
+            show(loginVc, sender: self)
+        }
+        
 
         // Do any additional setup after loading the view.
     }
