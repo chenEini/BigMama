@@ -13,7 +13,8 @@ extension Recipe{
     convenience init(json:[String:Any]){
         let id = json["id"] as! String;
         self.init(id:id)
-        name = json["name"] as! String;
+        
+        title = json["title"] as! String;
         image = json["image"] as! String;
         steps = json["steps"] as! String;
     }
@@ -21,7 +22,7 @@ extension Recipe{
     func toJson() -> [String:Any] {
         var json = [String:Any]();
         json["id"] = id
-        json["name"] = name
+        json["title"] = title
         json["image"] = image
         json["steps"] = steps
         return json;

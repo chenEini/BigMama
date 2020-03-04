@@ -14,6 +14,7 @@ extension User{
     convenience init(json:[String:Any]){
         let id = json["id"] as! String;
         self.init(id:id)
+        
         name = json["name"] as! String;
     }
    

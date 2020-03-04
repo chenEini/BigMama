@@ -10,12 +10,13 @@ import Foundation
 import Firebase
 
 class Recipe {
-   
+    
     let id:String
-    var name:String = ""
+    var title:String = ""
     var image:String = ""
     var steps:String = ""
-    var lastUpdate: Int64?
+    var lastUpdate:Int64?
+    var owner:User
     
     init(id:String){
         self.id = id

@@ -10,11 +10,10 @@ import Foundation
 import Firebase
 
 class User {
-   
+    
     let id:String
     var name: String = ""
-    
-    // Add Recipes Collection
+    var recipes: [Recipe] = []
     
     init(id:String){
         self.id = id

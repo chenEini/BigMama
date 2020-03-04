@@ -10,14 +10,45 @@ import Foundation
 import UIKit
 
 class Model {
+    
     static let instance = Model()
+    
     var modelFirebase:ModelFirebase = ModelFirebase()
     
     private init(){}
     
     func addUser(user:User){
-        modelFirebase.addUser(user: <#T##User#>);
+        modelFirebase.addUser(user: user);
     }
+    
+    func addRecipe(recipe:Recipe){
+        modelFirebase.addRecipe(recipe: recipe);
+    }
+    
+    func getAllRecipes(callback:@escaping ([Recipe]?)->Void){
+        //        // get the last update date
+        //        let lastUpdate = Recipe.getLastUpdateDate();
+        //
+        //        modelFirebase.getAllRecipes(since:lastUpdate) { (data) in
+        //            var lastUpdated:Int64 = 0;
+        //            for recipe in data!{ recipe.addToDb()  // insert update to the local db
+        //                if recipe.lastUpdate! > lastUpdated {lastUpdated = student.lastUpdate!}
+        //            }
+        //            //update the students local last update date
+        //            Recipe.setLastUpdate(lastUpdated: lastUpdated)
+        //
+        //            // get the complete student list
+        //            let finalData = Recipe.getAllRecipesFromDb()
+        //            callback(finalData);
+        //        }
+    }
+    
+    func saveImage(image:UIImage, callback:@escaping (String)->Void) {
+        //        FirebaseStorage.saveImage(image: image, callback: callback)
+    }
+    
+    
+    // Handle User Authentication //
     
     var loggedIn = false
     
@@ -43,6 +74,7 @@ class Model {
 class ModelEvents{
     static let LoggingStateChangeEvent = EventNotificationBase(eventName: "LoggingStateChangeEvent");
     
+    private init(){}
 }
 
 class EventNotificationBase{
@@ -59,9 +91,6 @@ class EventNotificationBase{
     }
     
     func post(){
-         NotificationCenter.default.post(name: NSNotification.Name(eventName),
-                                               object: self,
-                                               userInfo: nil);
-        
+        NotificationCenter.default.post(name: NSNotification.Name(eventName),object: self,userInfo: nil)
     }
 }
