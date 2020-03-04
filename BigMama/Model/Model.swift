@@ -25,6 +25,10 @@ class Model {
         modelFirebase.addRecipe(recipe: recipe);
     }
     
+    func getCurrentUser()->User{
+        return User(id:"1")
+    }
+    
     func getAllRecipes(callback:@escaping ([Recipe]?)->Void){
         //        // get the last update date
         //        let lastUpdate = Recipe.getLastUpdateDate();

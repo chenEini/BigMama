@@ -18,7 +18,8 @@ class Recipe {
     var lastUpdate:Int64?
     var owner:User
     
-    init(id:String){
+    init(id:String, owner:User){
         self.id = id
+        self.owner = owner
     }
 }
