@@ -15,6 +15,7 @@ protocol LoginViewControllerDelegate {
 
 class LoginViewController: UIViewController {
     var delegate:LoginViewControllerDelegate?
+    
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var pwd: UITextField!
     

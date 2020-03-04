@@ -12,7 +12,7 @@ extension Recipe{
     
     convenience init(json:[String:Any]){
         let id = json["id"] as! String;
-        self.init(id:id)
+        self.init(id:id,owner:Model.instance.getCurrentUser())
         
         title = json["title"] as! String;
         image = json["image"] as! String;
