@@ -30,25 +30,26 @@ class Model {
     }
     
     func getAllRecipes(callback:@escaping ([Recipe]?)->Void){
-        //        // get the last update date
-        //        let lastUpdate = Recipe.getLastUpdateDate();
-        //
-        //        modelFirebase.getAllRecipes(since:lastUpdate) { (data) in
-        //            var lastUpdated:Int64 = 0;
-        //            for recipe in data!{ recipe.addToDb()  // insert update to the local db
-        //                if recipe.lastUpdate! > lastUpdated {lastUpdated = student.lastUpdate!}
-        //            }
-        //            //update the students local last update date
-        //            Recipe.setLastUpdate(lastUpdated: lastUpdated)
-        //
-        //            // get the complete student list
-        //            let finalData = Recipe.getAllRecipesFromDb()
-        //            callback(finalData);
-        //        }
+        // get the last update date
+        let lastUpdate = Recipe.getLastUpdateDate();
+        
+        modelFirebase.getAllRecipes(since:lastUpdate) { (data) in
+            var lastUpdated:Int64 = 0;
+            for recipe in data!{
+                recipe.addToDb()  // insert to the local db
+                if recipe.lastUpdate! > lastUpdated {lastUpdated = recipe.lastUpdate!}
+            }
+            //update the recipes local last update date
+            Recipe.setLastUpdate(lastUpdated: lastUpdated)
+            
+            // get the complete student list
+            let finalData = Recipe.getAllRecipesFromDb()
+            callback(finalData);
+        }
     }
     
     func saveImage(image:UIImage, callback:@escaping (String)->Void) {
-        //        FirebaseStorage.saveImage(image: image, callback: callback)
+        FirebaseStorage.saveImage(image: image, callback: callback)
     }
     
     
@@ -77,6 +78,7 @@ class Model {
 
 class ModelEvents{
     static let LoggingStateChangeEvent = EventNotificationBase(eventName: "LoggingStateChangeEvent");
+    static let CommentsDataEvent = StringEventNotificationBase<String>(eventName: "CommentsDataEvent");
     
     private init(){}
 }
@@ -96,5 +98,27 @@ class EventNotificationBase{
     
     func post(){
         NotificationCenter.default.post(name: NSNotification.Name(eventName),object: self,userInfo: nil)
+    }
+}
+
+class StringEventNotificationBase<T>{
+    let eventName:String;
+    
+    init(eventName:String){
+        self.eventName = eventName;
+    }
+    
+    func observe(callback:@escaping (T)->Void){
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(eventName),
+                                               object: nil, queue: nil) { (data) in
+                                                let strData = data.userInfo!["data"] as! T
+                                                callback(strData);
+        }
+    }
+    
+    func post(data:T){
+        NotificationCenter.default.post(name: NSNotification.Name(eventName),
+                                        object: self,
+                                        userInfo: ["data":data]);
     }
 }
