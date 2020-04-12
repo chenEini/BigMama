@@ -7,37 +7,33 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar-->
         <scene sceneID="0cM-Dc-OSb">
             <objects>
-                <tabBarController id="xuv-sV-LZ3" sceneMemberID="viewController">
+                <tabBarController title="Main Tab Bar" id="xuv-sV-LZ3" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7l8-xU-nCb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="SMx-lt-WNw"/>
-                        <segue destination="vRu-uO-i2j" kind="relationship" relationship="viewControllers" id="aFl-47-4IR"/>
-                        <segue destination="I2b-bz-hYo" kind="relationship" relationship="viewControllers" id="riR-LS-PJ7"/>
+                        <segue destination="c7x-RG-zmD" kind="relationship" relationship="viewControllers" id="ak9-Er-0eh"/>
+                        <segue destination="oni-j4-CCM" kind="relationship" relationship="viewControllers" id="vfb-J5-7nz"/>
+                        <segue destination="NW1-ao-4Al" kind="relationship" relationship="viewControllers" id="8Vn-kG-FWl"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gYL-yb-mIA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1736" y="-159"/>
+            <point key="canvasLocation" x="-2226" y="-185"/>
         </scene>
-        <!--Recipes-->
+        <!--Recipe List-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Recipes" id="BYZ-38-t0r" customClass="RecipesFeedViewController" customModule="BigMama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Recipe List" id="BYZ-38-t0r" customClass="RecipesFeedViewController" customModule="BigMama" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIogo" id="Wuo-RK-giE">
-                                <rect key="frame" x="-5" y="38" width="419" height="206"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6LN-Hu-3Ab">
                                 <rect key="frame" x="0.0" y="252" width="414" height="561"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -77,15 +73,19 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="mRX-s0-i9Y"/>
                                 </connections>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="AppIogo" translatesAutoresizingMaskIntoConstraints="NO" id="Wuo-RK-giE">
+                                <rect key="frame" x="71.756184209032199" y="95" width="270" height="159.99999999999977"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Recpices" image="square.grid.2x2.fill" catalog="system" id="4EC-7Z-SK8"/>
+                    <navigationItem key="navigationItem" id="hDM-M6-grQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-371.01449275362324" y="-976.33928571428567"/>
+            <point key="canvasLocation" x="71" y="-931"/>
         </scene>
         <!--Add Recipe-->
         <scene sceneID="dol-Es-qhE">
@@ -103,7 +103,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="AppIogo" translatesAutoresizingMaskIntoConstraints="NO" id="6t9-99-NHS">
-                                <rect key="frame" x="0.0" y="60" width="419" height="226"/>
+                                <rect key="frame" x="71.75618420903038" y="95" width="270.00000000000017" height="159.99999999999977"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upload Recipe Image :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVc-dL-1rm">
@@ -156,7 +156,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="jes-Ca-4h0"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Add Recipe" image="pencil.and.ellipsis.rectangle" catalog="system" id="TI2-3e-NOV"/>
+                    <navigationItem key="navigationItem" id="5J4-PV-HiR"/>
                     <connections>
                         <outlet property="add" destination="7AF-22-cpZ" id="vAl-Bh-lL1"/>
                         <outlet property="addBtn" destination="7AF-22-cpZ" id="1PK-yP-oRo"/>
@@ -169,12 +169,29 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvj-fv-UFX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-371.01449275362324" y="-299.33035714285711"/>
+            <point key="canvasLocation" x="71" y="-271"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Profile Nav-->
+        <scene sceneID="2Je-V6-ob6">
+            <objects>
+                <navigationController title="Profile Nav" id="NW1-ao-4Al" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.crop.circle" catalog="system" id="KpO-aS-fhE"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cml-FP-b8b">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="I2b-bz-hYo" kind="relationship" relationship="rootViewController" id="ilW-Wm-tuI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FKs-Ei-Fhy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-797" y="396"/>
+        </scene>
+        <!--Login-->
         <scene sceneID="OlE-JW-Jo5">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="tbd-2t-UKu" customClass="LoginViewController" customModule="BigMama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" title="Login" id="tbd-2t-UKu" customClass="LoginViewController" customModule="BigMama" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PSZ-Nl-36o">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -225,12 +242,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KHJ-fk-uYe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-371.01449275362324" y="1047.9910714285713"/>
+            <point key="canvasLocation" x="-797" y="1075"/>
         </scene>
-        <!--Register View Controller-->
+        <!--Register-->
         <scene sceneID="VU5-Io-ZLj">
             <objects>
-                <viewController id="Yve-5w-CJz" customClass="RegisterViewController" customModule="BigMama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Register" id="Yve-5w-CJz" customClass="RegisterViewController" customModule="BigMama" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xlS-xP-x6U">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -270,12 +287,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zvr-gk-td0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="448" y="1048"/>
+            <point key="canvasLocation" x="71" y="1075"/>
         </scene>
-        <!--User Profile-->
+        <!--Profile-->
         <scene sceneID="Ooi-5V-W11">
             <objects>
-                <viewController title="User Profile" id="I2b-bz-hYo" customClass="UserProfileViewController" customModule="BigMama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile" id="I2b-bz-hYo" customClass="UserProfileViewController" customModule="BigMama" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dk2-yO-azv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -337,24 +354,20 @@
                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="yrp-Tw-8Pb"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="User Profile" image="person.crop.circle.fill" catalog="system" id="vZ1-Cz-M8s"/>
+                    <navigationItem key="navigationItem" id="mbv-rZ-AVB"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tuk-qj-Jky" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-371.01449275362324" y="373.66071428571428"/>
+            <point key="canvasLocation" x="71" y="396"/>
         </scene>
-        <!--Recipe View Controller-->
+        <!--View Recipe-->
         <scene sceneID="BUA-K9-h8m">
             <objects>
-                <viewController id="XDZ-rq-tMr" customClass="RecipeViewController" customModule="BigMama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="View Recipe" id="XDZ-rq-tMr" customClass="RecipeViewController" customModule="BigMama" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AuR-dT-Ksp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="AppIogo" translatesAutoresizingMaskIntoConstraints="NO" id="upu-bj-yJ2">
-                                <rect key="frame" x="0.0" y="44" width="414" height="201"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recipe Name : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epN-4P-o6h">
                                 <rect key="frame" x="60" y="305" width="115" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -381,6 +394,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="AppIogo" translatesAutoresizingMaskIntoConstraints="NO" id="upu-bj-yJ2">
+                                <rect key="frame" x="71.5" y="95" width="270" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="uwn-3c-hfT"/>
@@ -388,13 +405,47 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yhE-g9-PhX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="447.82608695652175" y="-976.33928571428567"/>
+            <point key="canvasLocation" x="843" y="-931"/>
+        </scene>
+        <!--Recipe Nav-->
+        <scene sceneID="JFc-Vs-E5R">
+            <objects>
+                <navigationController title="Recipe Nav" id="c7x-RG-zmD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Recipes" image="square.grid.2x2.fill" catalog="system" id="KYH-My-5lC"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="u9k-MS-gdL">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="tf1-f7-euj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RWx-Th-jCQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-796" y="-931"/>
+        </scene>
+        <!--Add Recipe Nav-->
+        <scene sceneID="pOV-PO-v0P">
+            <objects>
+                <navigationController title="Add Recipe Nav" id="oni-j4-CCM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Add Recipe" image="pencil.and.ellipsis.rectangle" catalog="system" id="jnQ-vU-3AG"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MSh-br-mpt">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vRu-uO-i2j" kind="relationship" relationship="rootViewController" id="Hp2-Sb-t2N"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Mw-4e-dNk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-796" y="-271"/>
         </scene>
     </scenes>
     <resources>
         <image name="AppIogo" width="555" height="440"/>
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="81"/>
-        <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="person.crop.circle" catalog="system" width="128" height="121"/>
         <image name="square.grid.2x2.fill" catalog="system" width="128" height="114"/>
     </resources>
 </document>
