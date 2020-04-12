@@ -18,7 +18,12 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // if not logged in: go to login page 
+        // if not logged in: go to login page
+        
+        if(!Model.instance.isLoggedIn()){
+            let loginVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginViewController")
+            show(loginVc, sender: self)
+        }
     }
     
     var selectedImage:UIImage?;
