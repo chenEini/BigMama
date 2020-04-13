@@ -19,22 +19,25 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTv: UITextField!
     @IBOutlet weak var pwdTv: UITextField!
     
+    static func factory()->LoginViewController{
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginViewController")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //hook to the navigation back button
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.back(sender:)))
         self.navigationItem.leftBarButtonItem = newBackButton
-        
     }
     
     @objc func back(sender: UIBarButtonItem) {
-                performSegue(withIdentifier: "cancelLoginSegue", sender: self)
+        //performSegue(withIdentifier: "cancelLoginSegue", sender: self)
         //self.navigationController?.popViewController(animated: true);
-
-        //if let delegate = delegate{
-        //    delegate.onLoginCancell()
-        //}
+        self.navigationController?.popViewController(animated: true);
+        if let delegate = delegate{
+            delegate.onLoginCancell()
+        }
     }
     
     @IBAction func login(_ sender: UIButton) {
@@ -42,6 +45,9 @@ class LoginViewController: UIViewController {
             if(success){
                 //go back when logged in
                 self.navigationController?.popViewController(animated: true)
+                if let delegate = delegate{
+                    delegate.onLoginSuccess()
+                }
             }
         }
     }

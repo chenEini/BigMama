@@ -8,19 +8,27 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+class UserProfileViewController: UIViewController, LoginViewControllerDelegate {
+    func onLoginSuccess() {
+    }
+    
+    func onLoginCancell() {
+        self.tabBarController?.selectedIndex = 0;
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated);
         if(!Model.instance.isLoggedIn()){
-            let loginVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginViewController")
+            let loginVc = LoginViewController.factory()
+            loginVc.delegate = self
             show(loginVc, sender: self)
         }
-        
-
-        // Do any additional setup after loading the view.
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
     
 
     /*

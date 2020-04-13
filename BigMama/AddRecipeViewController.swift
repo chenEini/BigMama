@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate, LoginViewControllerDelegate {
     
     @IBOutlet weak var recipeTitle: UITextField!
     @IBOutlet weak var recipeSteps: UITextField!
@@ -16,15 +16,29 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
     @IBOutlet weak var imageBtn: UIButton!
     @IBOutlet weak var addBtn: UIButton!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func onLoginSuccess() {
+    }
+    
+    func onLoginCancell() {
+        //self.navigationController?.popViewController(animated: true);
+        self.tabBarController?.selectedIndex = 0;
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated);
         // if not logged in: go to login page
-        
         if(!Model.instance.isLoggedIn()){
-            let loginVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginViewController")
+            let loginVc = LoginViewController.factory()
+            loginVc.delegate = self
             show(loginVc, sender: self)
         }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+
     
     var selectedImage:UIImage?;
     
