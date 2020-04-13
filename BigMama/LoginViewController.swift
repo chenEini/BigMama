@@ -16,8 +16,8 @@ protocol LoginViewControllerDelegate {
 class LoginViewController: UIViewController {
     var delegate:LoginViewControllerDelegate?
     
-    @IBOutlet weak var email: UITextField!
-    @IBOutlet weak var pwd: UITextField!
+    @IBOutlet weak var emailTv: UITextField!
+    @IBOutlet weak var pwdTv: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +29,16 @@ class LoginViewController: UIViewController {
     }
     
     @objc func back(sender: UIBarButtonItem) {
-        //        performSegue(withIdentifier: "cancelLoginSegue", sender: self)
-        self.navigationController?.popViewController(animated: true);
+                performSegue(withIdentifier: "cancelLoginSegue", sender: self)
+        //self.navigationController?.popViewController(animated: true);
 
-        if let delegate = delegate{
-            delegate.onLoginCancell()
-        }
+        //if let delegate = delegate{
+        //    delegate.onLoginCancell()
+        //}
     }
     
     @IBAction func login(_ sender: UIButton) {
-        Model.instance.logIn(email: email.text!, pwd: pwd.text!) { (success) in
+        Model.instance.logIn(email: emailTv.text!, pwd: pwdTv.text!) { (success) in
             if(success){
                 //go back when logged in
                 self.navigationController?.popViewController(animated: true)
@@ -48,11 +48,12 @@ class LoginViewController: UIViewController {
     
 
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
+ //   override func viewDidAppear(_ animated: Bool) {
+ //       super.viewDidAppear(animated)
+ //   }
+ 
+ //   override func viewWillAppear(_ animated: Bool) {
+ //       super.viewWillAppear(animated)
+ //   }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
 }

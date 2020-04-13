@@ -47,4 +47,7 @@ class RecipesFeedViewController: UIViewController, UITableViewDelegate, UITableV
             vc.recipe = selectedRecipe
         }
     }
+    
+    @IBAction func backFromCancelLogin(segue: UIStoryboardSegue){
+    }
 }
