@@ -13,6 +13,7 @@ class Model {
     
     static let instance = Model()
     
+    // var modelSql:ModelSql = ModelSql.instance // sql
     var modelFirebase:ModelFirebase = ModelFirebase()
     
     private init(){}
@@ -43,7 +44,7 @@ class Model {
         let maffin = Recipe(id: "3", owner: User(id: "3"))
         maffin.title = "Maffin"
         maffin.steps = "1. Add 2 eggs 2. Add sugar"
-    
+        
         let cookie = Recipe(id: "4", owner: User(id: "4"))
         cookie.title = "Cookie"
         cookie.steps = "1. Add 2 eggs 2. Add sugar"
