@@ -11,6 +11,7 @@
 		27A94CC723CF73D5005B3B00 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A94CC623CF73D5005B3B00 /* LoginViewController.swift */; };
 		27A94CC923CF7439005B3B00 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A94CC823CF7439005B3B00 /* RegisterViewController.swift */; };
 		27A94CCB23CF758D005B3B00 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A94CCA23CF758D005B3B00 /* AddRecipeViewController.swift */; };
+		27E8E7CE2444D43500EE3B19 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E8E7CD2444D3F200EE3B19 /* libsqlite3.0.tbd */; };
 		27EF2CA923D8A70600DB97F0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF2CA823D8A70600DB97F0 /* User.swift */; };
 		27EF2CAB23D8A73900DB97F0 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF2CAA23D8A73900DB97F0 /* Recipe.swift */; };
 		27EF2CAD23D8ACE600DB97F0 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF2CAC23D8ACE600DB97F0 /* UserProfileViewController.swift */; };
@@ -60,6 +61,8 @@
 		27A94CC623CF73D5005B3B00 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		27A94CC823CF7439005B3B00 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		27A94CCA23CF758D005B3B00 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
+		27E8E7CD2444D3F200EE3B19 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		27E8E7CF2444D53B00EE3B19 /* BigMama-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BigMama-Bridging-Header.h"; sourceTree = "<group>"; };
 		27EF2CA823D8A70600DB97F0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		27EF2CAA23D8A73900DB97F0 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		27EF2CAC23D8ACE600DB97F0 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27E8E7CE2444D43500EE3B19 /* libsqlite3.0.tbd in Frameworks */,
 				D0B3F21E0EDDB465DC19BB5C /* Pods_BigMama.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,6 +199,7 @@
 				27A94CC823CF7439005B3B00 /* RegisterViewController.swift */,
 				27F376F423C6310E00603AF3 /* Info.plist */,
 				27F3771623C6413D00603AF3 /* GoogleService-Info.plist */,
+				27E8E7CF2444D53B00EE3B19 /* BigMama-Bridging-Header.h */,
 			);
 			path = BigMama;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 		D749A9EE8534014F44AED4C9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27E8E7CD2444D3F200EE3B19 /* libsqlite3.0.tbd */,
 				D8BCB8898F1F8CD156CADBF1 /* Pods_BigMama.framework */,
 				2CEDCA2D440336CCD7E0EAAD /* Pods_BigMama_BigMamaUITests.framework */,
 				34161D4ED4F62EB679A84CC9 /* Pods_BigMamaTests.framework */,
@@ -300,6 +306,7 @@
 				TargetAttributes = {
 					27F376E223C6310D00603AF3 = {
 						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1140;
 					};
 					27F376F823C6310E00603AF3 = {
 						CreatedOnToolsVersion = 11.3;
@@ -659,6 +666,7 @@
 			baseConfigurationReference = 857CBAEA3B42A3239E45B6F4 /* Pods-BigMama.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = BigMama/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -667,6 +675,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = BigMama.BigMama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BigMama/BigMama-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -677,6 +687,7 @@
 			baseConfigurationReference = F7F21C8E2AA3F01E76CC47D9 /* Pods-BigMama.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = BigMama/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -685,6 +696,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = BigMama.BigMama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BigMama/BigMama-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
