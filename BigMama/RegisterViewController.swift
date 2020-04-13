@@ -10,19 +10,23 @@ import UIKit
 
 class RegisterViewController: UIViewController {
 
-    @IBOutlet weak var name: UITextField!
-    @IBOutlet weak var email: UITextField!
-    @IBOutlet weak var pwd: UITextField!
-
-    @IBAction func register(_ sender: UIButton) {
-    }
+    @IBOutlet weak var nameTv: UITextField!
+    @IBOutlet weak var emailTv: UITextField!
+    @IBOutlet weak var pwdTv: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
-
+    @IBAction func register(_ sender: UIButton) {
+        Model.instance.register(name: nameTv.text!, email: emailTv.text!, pwd: pwdTv.text!) {(success) in
+            if(success){
+                //go back when register
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
