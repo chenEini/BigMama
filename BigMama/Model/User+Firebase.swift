@@ -16,12 +16,18 @@ extension User{
         self.init(id:id)
         
         name = json["name"] as! String;
+        avatar = json["avatar"] as! String;
+        
+        let ts = json["lastUpdate"] as! Timestamp
+        lastUpdate = ts.seconds
     }
    
     func toJson() -> [String:Any] {
-        var json = [String:Any]();
-        json["id"] = id
-        json["name"] = name
-        return json;
-    }
+         var json = [String:Any]();
+         json["id"] = id
+         json["name"] = name
+         json["avatar"] = avatar
+         json["lastUpdate"] = FieldValue.serverTimestamp()
+         return json;
+     }
 }

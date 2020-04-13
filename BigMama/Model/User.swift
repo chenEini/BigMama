@@ -12,7 +12,10 @@ import Firebase
 class User {
     
     let id:String
-    var name: String = ""
+    var name:String = ""
+    var avatar:String = ""
+    var lastUpdate: Int64?
+
     var recipes: [Recipe] = []
     
     init(id:String){
