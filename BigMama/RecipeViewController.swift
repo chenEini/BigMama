@@ -20,11 +20,6 @@ class RecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        if(!Model.instance.isLoggedIn()){
-        //            let loginVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginViewController")
-        //            show(loginVc, sender: self)
-        //        }
-        
         userName.text = recipe?.owner.name
         recipeTitle.text = recipe?.title
         recipeImg.image = UIImage(named: "maffin")

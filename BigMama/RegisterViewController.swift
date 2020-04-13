@@ -23,7 +23,7 @@ class RegisterViewController: UIViewController {
             if(success){
                 //go back when register
                 self.navigationController?.popViewController(animated: true)
-            }
+                self.navigationController?.popViewController(animated: true)            }
         }
     }
     
