@@ -250,11 +250,9 @@
                     <connections>
                         <outlet property="emailTv" destination="GE6-BE-hjM" id="mgh-sg-abT"/>
                         <outlet property="pwdTv" destination="rPy-Bx-l99" id="nx6-fQ-l7n"/>
-                        <segue destination="1fW-dz-7sG" kind="unwind" identifier="cancelLoginSegue" unwindAction="backFromCancelLoginWithSegue:" id="CkA-Rm-Jdv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KHJ-fk-uYe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="1fW-dz-7sG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-797.10144927536237" y="1074.1071428571429"/>
         </scene>
