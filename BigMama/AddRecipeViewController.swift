@@ -65,7 +65,7 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         addBtn.isEnabled = false;
         imageBtn.isEnabled = false;
         
-        let recipe = Recipe(id:"1",owner:Model.instance.getCurrentUser());
+        let recipe = Recipe(id:"1",ownerId:Model.instance.getCurrentUserId());
         
         recipe.title = self.recipeTitle.text!
         recipe.steps = self.recipeSteps.text!
