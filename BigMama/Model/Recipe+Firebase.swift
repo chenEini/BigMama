@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 extension Recipe{
     
@@ -17,6 +18,9 @@ extension Recipe{
         title = json["title"] as! String;
         image = json["image"] as! String;
         steps = json["steps"] as! String;
+        
+        let ts = json["lastUpdate"] as! Timestamp
+        lastUpdate = ts.seconds
     }
    
     func toJson() -> [String:Any] {
@@ -25,6 +29,7 @@ extension Recipe{
         json["title"] = title
         json["image"] = image
         json["steps"] = steps
+        json["lastUpdate"] = FieldValue.serverTimestamp()
         return json;
     }
 }

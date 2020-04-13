@@ -16,6 +16,7 @@ class Recipe {
     var image:String = ""
     var steps:String = ""
     var lastUpdate:Int64?
+
     var owner:User
     
     init(id:String, owner:User){
