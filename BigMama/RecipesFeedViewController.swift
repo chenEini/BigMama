@@ -17,6 +17,8 @@ class RecipesFeedViewController: UIViewController, UITableViewDelegate, UITableV
         data = Model.instance.getAllRecipes()
     }
     
+    var selectedRecipe:Recipe?
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
@@ -28,9 +30,21 @@ class RecipesFeedViewController: UIViewController, UITableViewDelegate, UITableV
         let recipe = data[indexPath.row]
         
         cell.userName.text = "user number : " + recipe.owner.id
-        cell.recpieImg = nil
+        cell.recpieImg.image = UIImage(named: "maffin")
         cell.recipeTitle.text = recipe.title
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRecipe = data[indexPath.row]
+        performSegue(withIdentifier: "recipeViewSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "recipeViewSegue"){
+            let vc:RecipeViewController = segue.destination as! RecipeViewController
+            vc.recipe = selectedRecipe
+        }
     }
 }

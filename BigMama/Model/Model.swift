@@ -31,15 +31,27 @@ class Model {
     
     func getAllRecipes() ->[Recipe]{  //TEMP
         var data = [Recipe]()
+        
         let pancakes = Recipe(id: "1", owner: User(id: "1"))
         pancakes.title = "Pancakes"
+        pancakes.steps = "1. Add 2 eggs 2. Add sugar"
+        
         let cake = Recipe(id: "2", owner: User(id: "2"))
         cake.title = "Cake"
+        cake.steps = "1. Add 2 eggs 2. Add sugar"
+        
         let maffin = Recipe(id: "3", owner: User(id: "3"))
         maffin.title = "Maffin"
+        maffin.steps = "1. Add 2 eggs 2. Add sugar"
+    
+        let cookie = Recipe(id: "4", owner: User(id: "4"))
+        cookie.title = "Cookie"
+        cookie.steps = "1. Add 2 eggs 2. Add sugar"
+        
         data.append(pancakes)
         data.append(cake)
         data.append(maffin)
+        data.append(cookie)
         
         return data
     }
