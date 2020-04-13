@@ -16,6 +16,7 @@ class ModelSql{
     
     private init() {
         let dbFileName = "bigmama.db"
+        
         if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         {
             let path = dir.appendingPathComponent(dbFileName)
@@ -27,8 +28,8 @@ class ModelSql{
         
         create();
         
-       // User.createTable(database: database);
-       // Recipe.createTable(database: database);
+        User.createTable(database: database);
+        Recipe.createTable(database: database);
     }
     
     deinit {

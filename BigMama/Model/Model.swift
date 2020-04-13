@@ -13,7 +13,8 @@ class Model {
     
     static let instance = Model()
     
-    // var modelSql:ModelSql = ModelSql.instance // sql
+    // var modelSql:ModelSql = ModelSql.instance
+    
     var modelFirebase:ModelFirebase = ModelFirebase()
     
     private init(){}
@@ -26,8 +27,8 @@ class Model {
         modelFirebase.addRecipe(recipe: recipe);
     }
     
-    func getCurrentUser()->User{
-        return User(id:"1")  // TODO
+    func getCurrentUser()->User{ // TEMP
+        return User(id:"1")
     }
     
     func getAllRecipes() ->[Recipe]{  //TEMP
@@ -57,30 +58,30 @@ class Model {
         return data
     }
     
-    //    func getAllRecipes(callback:@escaping ([Recipe]?)->Void){
-    //        // get the last update date
-    //        let lastUpdate = Recipe.getLastUpdateDate();
-    //
-    //        modelFirebase.getAllRecipes(since:lastUpdate) { (data) in
-    //            var lastUpdated:Int64 = 0;
-    //            for recipe in data!{
-    //                recipe.addToDb()  // insert to the local db
-    //                if recipe.lastUpdate! > lastUpdated {lastUpdated = recipe.lastUpdate!}
-    //            }
-    //            //update the recipes local last update date
-    //            Recipe.setLastUpdate(lastUpdated: lastUpdated)
-    //
-    //            // get the complete student list
-    //            let finalData = Recipe.getAllRecipesFromDb()
-    //            callback(finalData);
-    //        }
-    //    }
+    func getAllRecipesFinal(callback:@escaping ([Recipe]?)->Void){
+        // get the last update date
+        let lastUpdate = Recipe.getLastUpdateDate();
+        
+        modelFirebase.getAllRecipes(since:lastUpdate) { (data) in
+            var lastUpdate:Int64 = 0;
+            for recipe in data!{
+                recipe.addToDb()  // insert to the local db
+                if recipe.lastUpdate! > lastUpdate {lastUpdate = recipe.lastUpdate!}
+            }
+            //update the recipes local last update date
+            Recipe.setLastUpdate(lastUpdated: lastUpdate)
+            
+            // get the complete recipe list
+            let finalData = Recipe.getAllRecipesFromDb()
+            callback(finalData);
+        }
+    }
     
     func saveImage(image:UIImage, callback:@escaping (String)->Void) {
         FirebaseStorage.saveImage(image: image, callback: callback)
     }
     
-    // Handle User Authentication //
+    //* Handle User Authentication *//
     
     var loggedIn = false
     
@@ -103,7 +104,7 @@ class Model {
     }
 }
 
-// Handle Events //
+//* Handle Events *//
 
 class ModelEvents{
     static let LoggingStateChangeEvent = EventNotificationBase(eventName: "LoggingStateChangeEvent");

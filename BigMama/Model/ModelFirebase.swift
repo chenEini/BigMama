@@ -41,14 +41,15 @@ class ModelFirebase {
     
     func getAllRecipes(since:Int64, callback: @escaping ([Recipe]?)->Void){
         let db = Firestore.firestore()
-        
         db.collection("recipes").order(by: "lastUpdate").start(at: [Timestamp(seconds: since, nanoseconds: 0)])
             .getDocuments {(querySnapshot, err) in
-                
-                if let err = err {
+                if let err = err
+                {
                     print("Error getting documents: \(err)")
                     callback(nil);
-                } else {
+                }
+                else
+                {
                     var data = [Recipe]();
                     for document in querySnapshot!.documents {
                         if let ts = document.data()["lastUpdate"] as? Timestamp{
@@ -56,7 +57,6 @@ class ModelFirebase {
                             print("\(tsDate)");
                             let tsDouble = tsDate.timeIntervalSince1970;
                             print("\(tsDouble)");
-                            
                         }
                         data.append(Recipe(json: document.data()));
                     }
