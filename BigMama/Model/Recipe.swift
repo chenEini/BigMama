@@ -12,15 +12,15 @@ import Firebase
 class Recipe {
     
     let id:String
+    var ownerId:String
+    var ownerName:String = ""
     var title:String = ""
     var image:String = ""
     var steps:String = ""
     var lastUpdate:Int64?
-
-    var owner:User
     
-    init(id:String, owner:User){
+    init(id:String, ownerId:String){
         self.id = id
-        self.owner = owner
+        self.ownerId = ownerId
     }
 }

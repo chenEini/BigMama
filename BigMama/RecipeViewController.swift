@@ -20,7 +20,7 @@ class RecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userName.text = recipe?.owner.name
+        userName.text = recipe?.ownerName
         recipeTitle.text = recipe?.title
         recipeImg.image = UIImage(named: "maffin")
         recipeSteps.text = recipe?.steps
@@ -36,5 +36,4 @@ class RecipeViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    
 }

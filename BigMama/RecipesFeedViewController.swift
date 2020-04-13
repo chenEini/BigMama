@@ -14,7 +14,7 @@ class RecipesFeedViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        data = Model.instance.getAllRecipes()
+        data = Model.instance.getAllLocalRecipes()
     }
     
     var selectedRecipe:Recipe?
@@ -29,7 +29,7 @@ class RecipesFeedViewController: UIViewController, UITableViewDelegate, UITableV
         
         let recipe = data[indexPath.row]
         
-        cell.userName.text = "user number : " + recipe.owner.id
+        cell.userName.text = recipe.ownerName
         cell.recpieImg.image = UIImage(named: "maffin")
         cell.recipeTitle.text = recipe.title
         

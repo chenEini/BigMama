@@ -27,28 +27,36 @@ class Model {
         modelFirebase.addRecipe(recipe: recipe);
     }
     
-    func getCurrentUser()->User{ // TEMP
-        return User(id:"1")
+    func getCurrentUserId()->String{ // TEMP
+        return "1"
     }
     
-    func getAllRecipes() ->[Recipe]{  //TEMP
+    func getCurrentUserName()->String{ // TEMP
+        return "user name"
+    }
+    
+    func getAllLocalRecipes() ->[Recipe]{  //TEMP
         var data = [Recipe]()
         
-        let pancakes = Recipe(id: "1", owner: User(id: "1"))
+        let pancakes = Recipe(id: "1", ownerId: "1")
+        pancakes.ownerName = "Chen"
         pancakes.title = "Pancakes"
-        pancakes.steps = "1. Add 2 eggs 2. Add sugar"
+        pancakes.steps = "Add 2 eggs and one cup of sugar"
         
-        let cake = Recipe(id: "2", owner: User(id: "2"))
+        let cake = Recipe(id: "2", ownerId: "2")
+        cake.ownerName = "Kamil"
         cake.title = "Cake"
-        cake.steps = "1. Add 2 eggs 2. Add sugar"
+        cake.steps = "Add 2 eggs and one cup of sugar"
         
-        let maffin = Recipe(id: "3", owner: User(id: "3"))
+        let maffin = Recipe(id: "3", ownerId: "3")
+        maffin.ownerName = "Chen"
         maffin.title = "Maffin"
-        maffin.steps = "1. Add 2 eggs 2. Add sugar"
+        maffin.steps = "Add 2 eggs and one cup of sugar"
         
-        let cookie = Recipe(id: "4", owner: User(id: "4"))
+        let cookie = Recipe(id: "4", ownerId: "4")
+        cookie.ownerName = "Kamil"
         cookie.title = "Cookie"
-        cookie.steps = "1. Add 2 eggs 2. Add sugar"
+        cookie.steps = "Add 2 eggs and one cup of sugar"
         
         data.append(pancakes)
         data.append(cake)
@@ -58,7 +66,7 @@ class Model {
         return data
     }
     
-    func getAllRecipesFinal(callback:@escaping ([Recipe]?)->Void){
+    func getAllRecipes(callback:@escaping ([Recipe]?)->Void){
         // get the last update date
         let lastUpdate = Recipe.getLastUpdateDate();
         

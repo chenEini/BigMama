@@ -49,7 +49,7 @@ class ModelSql{
     func setLastUpdate(name:String, lastUpdated:Int64){
         var sqlite3_stmt: OpaquePointer? = nil
         if (sqlite3_prepare_v2(database,
-                               "INSERT OR REPLACE INTO LAST_UPADATE_DATE( NAME, DATE) VALUES (?,?);",-1, &sqlite3_stmt,nil) == SQLITE_OK){
+                               "INSERT OR REPLACE INTO LAST_UPADATE_DATE(NAME, DATE) VALUES (?,?);",-1, &sqlite3_stmt,nil) == SQLITE_OK){
             
             sqlite3_bind_text(sqlite3_stmt, 1, name,-1,nil);
             sqlite3_bind_int64(sqlite3_stmt, 2, lastUpdated);
