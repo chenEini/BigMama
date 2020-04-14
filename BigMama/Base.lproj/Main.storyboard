@@ -171,6 +171,7 @@
                         <outlet property="imageView" destination="AY7-37-TT2" id="pVZ-b6-em0"/>
                         <outlet property="recipeSteps" destination="9JC-jh-6dN" id="40B-4Y-rNg"/>
                         <outlet property="recipeTitle" destination="4E6-jk-6ba" id="d3q-UP-M9W"/>
+                        <segue destination="XDZ-rq-tMr" kind="show" identifier="newRecipeViewSegue" id="dSo-QF-ImR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvj-fv-UFX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -486,7 +487,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yhE-g9-PhX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="842.02898550724649" y="-931.47321428571422"/>
+            <point key="canvasLocation" x="1038" y="-526"/>
         </scene>
         <!--Recipe Nav-->
         <scene sceneID="JFc-Vs-E5R">
@@ -523,6 +524,9 @@
             <point key="canvasLocation" x="-796" y="-271"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="dSo-QF-ImR"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="AppLogo" width="555" height="440"/>
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="81"/>

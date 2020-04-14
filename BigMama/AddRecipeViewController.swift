@@ -41,12 +41,10 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
     var selectedImage:UIImage?;
     
     @IBAction func image(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(
-            UIImagePickerController.SourceType.photoLibrary) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self;
-            imagePicker.sourceType =
-                UIImagePickerController.SourceType.photoLibrary;
+            imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary;
             imagePicker.allowsEditing = true
             self.present(imagePicker, animated: true, completion: nil)
         }
@@ -58,35 +56,35 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         dismiss(animated: true, completion: nil);
     }
     
+    var newRecipe:Recipe?
+    
     @IBAction func add(_ sender: Any) {
         addBtn.isEnabled = false;
         imageBtn.isEnabled = false;
         
-        let recipe = Recipe(id:"1",ownerId:Model.instance.getCurrentUserId());
+        let recipe = Recipe(id:"5",ownerId:Model.instance.getCurrentUserId());
         
         recipe.title = self.recipeTitle.text!
         recipe.steps = self.recipeSteps.text!
         
         guard let selectedImage = selectedImage else {
             Model.instance.addRecipe(recipe: recipe);
-            self.navigationController?.popViewController(animated: true);
             return;
         }
         
         Model.instance.saveImage(image: selectedImage) { (url) in
             recipe.image = url;
             Model.instance.addRecipe(recipe: recipe);
-            self.navigationController?.popViewController(animated: true);
         }
+        
+        newRecipe = recipe
+        performSegue(withIdentifier: "newRecipeViewSegue", sender: self)
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "newRecipeViewSegue"){
+            let vc:RecipeViewController = segue.destination as! RecipeViewController
+            vc.recipe = newRecipe
+        }
+    }
 }

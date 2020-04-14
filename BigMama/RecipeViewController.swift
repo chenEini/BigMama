@@ -22,7 +22,7 @@ class RecipeViewController: UIViewController {
         
         userName.text = recipe?.ownerName
         recipeTitle.text = recipe?.title
-        recipeImg.image = UIImage(named: "maffin")
+        recipeImg.image = UIImage(named: "maffin") // TEMP
         recipeSteps.text = recipe?.steps
     }
     

@@ -14,6 +14,7 @@ class RecipesFeedViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         data = Model.instance.getAllLocalRecipes()
     }
     
@@ -30,7 +31,7 @@ class RecipesFeedViewController: UIViewController, UITableViewDelegate, UITableV
         let recipe = data[indexPath.row]
         
         cell.userName.text = recipe.ownerName
-        cell.recpieImg.image = UIImage(named: "maffin")
+        cell.recpieImg.image = UIImage(named: "maffin") // TEMP
         cell.recipeTitle.text = recipe.title
         
         return cell
@@ -47,5 +48,4 @@ class RecipesFeedViewController: UIViewController, UITableViewDelegate, UITableV
             vc.recipe = selectedRecipe
         }
     }
-    
 }
