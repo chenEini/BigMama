@@ -24,7 +24,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gYL-yb-mIA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2226" y="-185"/>
+            <point key="canvasLocation" x="-2093" y="-271"/>
         </scene>
         <!--Recipe List-->
         <scene sceneID="tne-QT-ifu">
@@ -93,7 +93,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="69.565217391304358" y="-931.47321428571422"/>
+            <point key="canvasLocation" x="67" y="-964"/>
         </scene>
         <!--Add Recipe-->
         <scene sceneID="dol-Es-qhE">
@@ -176,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvj-fv-UFX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="69.565217391304358" y="-271.20535714285711"/>
+            <point key="canvasLocation" x="70" y="-320"/>
         </scene>
         <!--Profile Nav-->
         <scene sceneID="2Je-V6-ob6">
@@ -193,7 +193,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FKs-Ei-Fhy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-797" y="396"/>
+            <point key="canvasLocation" x="-797" y="320"/>
         </scene>
         <!--Login-->
         <scene sceneID="OlE-JW-Jo5">
@@ -407,14 +407,14 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User Name :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AmG-ks-0bf">
-                                <rect key="frame" x="7" y="280" width="155" height="64"/>
+                                <rect key="frame" x="7" y="249" width="155" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="USER PROFILE PAGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tn9-Ul-tO2">
-                                <rect key="frame" x="0.0" y="230" width="414" height="64"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Recipes :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmT-87-76V">
+                                <rect key="frame" x="6" y="319" width="155" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -425,10 +425,13 @@
                         <viewLayoutGuide key="safeArea" id="yrp-Tw-8Pb"/>
                     </view>
                     <navigationItem key="navigationItem" id="mbv-rZ-AVB"/>
+                    <connections>
+                        <segue destination="XDZ-rq-tMr" kind="show" identifier="myRecipeViewSegue" id="QIN-jP-nOW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tuk-qj-Jky" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="71" y="396"/>
+            <point key="canvasLocation" x="68" y="320"/>
         </scene>
         <!--View Recipe-->
         <scene sceneID="BUA-K9-h8m">
@@ -503,7 +506,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yhE-g9-PhX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1038" y="-526"/>
+            <point key="canvasLocation" x="1068" y="-535"/>
         </scene>
         <!--Recipe Nav-->
         <scene sceneID="JFc-Vs-E5R">
@@ -520,7 +523,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RWx-Th-jCQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-796" y="-931"/>
+            <point key="canvasLocation" x="-797" y="-964"/>
         </scene>
         <!--Add Recipe Nav-->
         <scene sceneID="pOV-PO-v0P">
@@ -537,11 +540,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Mw-4e-dNk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-796" y="-271"/>
+            <point key="canvasLocation" x="-797" y="-320"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="dSo-QF-ImR"/>
+        <segue reference="QIN-jP-nOW"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AppLogo" width="555" height="440"/>
