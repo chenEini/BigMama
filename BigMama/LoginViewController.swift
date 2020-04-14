@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailTv: UITextField!
     @IBOutlet weak var pwdTv: UITextField!
+    @IBOutlet weak var errorLabel: UILabel!
     
     static func factory()->LoginViewController{
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginViewController")
@@ -25,7 +26,10 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         pwdTv.isSecureTextEntry = true
+        errorLabel.alpha = 0
+        
         //hook to the navigation back button
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.back(sender:)))
