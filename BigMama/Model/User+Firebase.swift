@@ -24,7 +24,6 @@ extension User{
    
     func toJson() -> [String:Any] {
          var json = [String:Any]();
-         json["id"] = id
          json["name"] = name
          json["avatar"] = avatar
          json["lastUpdate"] = FieldValue.serverTimestamp()

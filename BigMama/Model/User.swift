@@ -16,7 +16,7 @@ class User {
     var avatar:String = ""
     var lastUpdate: Int64?
     
-    init(id:String){
+    init(id:String=""){
         self.id = id
     }
 }

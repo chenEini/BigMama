@@ -28,7 +28,6 @@ extension Recipe{
     
     func toJson() -> [String:Any] {
         var json = [String:Any]();
-        json["id"] = id
         json["ownerId"] = ownerId
         json["ownerName"] = ownerName
         json["title"] = title

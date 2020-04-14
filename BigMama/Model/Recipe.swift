@@ -19,7 +19,7 @@ class Recipe {
     var steps:String = ""
     var lastUpdate:Int64?
     
-    init(id:String, ownerId:String){
+    init(id:String="", ownerId:String){
         self.id = id
         self.ownerId = ownerId
     }

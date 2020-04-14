@@ -62,23 +62,24 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         addBtn.isEnabled = false;
         imageBtn.isEnabled = false;
         
-        let recipe = Recipe(id:"5",ownerId:Model.instance.getCurrentUserId());
+        let recipe = Recipe(ownerId:Model.instance.getCurrentUserId());
         
         recipe.title = self.recipeTitle.text!
         recipe.steps = self.recipeSteps.text!
         
         guard let selectedImage = selectedImage else {
             Model.instance.addRecipe(recipe: recipe);
+            newRecipe = recipe
+            performSegue(withIdentifier: "newRecipeViewSegue", sender: self)
             return;
         }
         
         Model.instance.saveImage(image: selectedImage) { (url) in
             recipe.image = url;
             Model.instance.addRecipe(recipe: recipe);
+            self.newRecipe = recipe
+            self.performSegue(withIdentifier: "newRecipeViewSegue", sender: self)
         }
-        
-        newRecipe = recipe
-        performSegue(withIdentifier: "newRecipeViewSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

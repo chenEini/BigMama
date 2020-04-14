@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 
 class FirebaseStorage {
+   
     static func saveImage(image:UIImage, callback:@escaping (String)->Void){
         let storageRef = Storage.storage().reference(forURL:"gs://bigmama-21a82.appspot.com")
         let data = image.jpegData(compressionQuality: 0.5)
