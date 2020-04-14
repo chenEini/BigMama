@@ -38,8 +38,6 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         super.viewDidLoad()
     }
     
-
-    
     var selectedImage:UIImage?;
     
     @IBAction func image(_ sender: Any) {
@@ -59,7 +57,6 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         self.imageView.image = selectedImage;
         dismiss(animated: true, completion: nil);
     }
-    
     
     @IBAction func add(_ sender: Any) {
         addBtn.isEnabled = false;
@@ -83,8 +80,6 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         }
     }
     
-    
-    
     /*
      // MARK: - Navigation
      
@@ -94,5 +89,4 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
      // Pass the selected object to the new view controller.
      }
      */
-    
 }
