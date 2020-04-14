@@ -16,6 +16,7 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        pwdTv.isSecureTextEntry = true
     }
     
     @IBAction func register(_ sender: UIButton) {

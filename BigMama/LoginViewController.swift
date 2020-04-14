@@ -25,6 +25,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        pwdTv.isSecureTextEntry = true
         //hook to the navigation back button
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.back(sender:)))
