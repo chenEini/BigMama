@@ -30,6 +30,21 @@ class ModelFirebase {
         let db = Firestore.firestore()
         let json = recipe.toJson();
         
+        db.collection("recipes").addDocument(data: json){
+            err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+                // ModelEvents.RecipeDataEvent.post();
+            }
+        }
+    }
+    
+    func updateRecipe(recipe:Recipe){
+        let db = Firestore.firestore()
+        let json = recipe.toJson();
+        
         db.collection("recipes").document(recipe.id).setData(json){
             err in
             if let err = err {
