@@ -24,4 +24,9 @@ class User {
         self.email = email
         self.pwd = pwd
     }
+    
+    init(id:String="")
+    {
+        self.id = id
+    }
 }
