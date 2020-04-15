@@ -11,14 +11,18 @@ import UIKit
 import Firebase
 
 class FirebaseStorage {
-   
-    static func saveImage(image:UIImage, callback:@escaping (String)->Void){
-        let storageRef = Storage.storage().reference(forURL:"gs://bigmama-21a82.appspot.com")
+    lazy var storageRef = Storage.storage().reference(forURL:"gs://bigmama-21a82.appspot.com")
+    
+    func saveImage(image:UIImage, callback:@escaping (String)->Void){
         let data = image.jpegData(compressionQuality: 0.5)
         let imageRef = storageRef.child("imageName")
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
-        imageRef.putData(data!, metadata: metadata) { (metadata, error) in
+        imageRef.putData(data!, metadata: nil) { (metadata, error) in
+            if (error != nil) {
+                print("Image not stored: ", error!.localizedDescription)
+                return
+            }
             imageRef.downloadURL { (url, error) in
                 guard let downloadURL = url else {
                     return

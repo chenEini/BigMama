@@ -14,12 +14,13 @@ class Model {
     static let instance = Model()
     
     var modelFirebase:ModelFirebase = ModelFirebase()
+    var firebaseStorage: FirebaseStorage = FirebaseStorage()
     
     private init(){}
     
-    func addUser(user:User){
-        modelFirebase.addUser(user: user);
-    }
+    //func addUser(user:User){
+    //    modelFirebase.addUser(user: user);
+    //}
     
     func upsertRecpie(recipe:Recipe){
         modelFirebase.upsertRecpie(recipe: recipe);
@@ -53,7 +54,7 @@ class Model {
     }
     
     func saveImage(image:UIImage, callback:@escaping (String)->Void) {
-        FirebaseStorage.saveImage(image: image, callback: callback)
+        firebaseStorage.saveImage(image: image, callback: callback)
     }
     
     //* Handle User Authentication *//
@@ -73,9 +74,14 @@ class Model {
         loggedIn = false;
     }
     
-    func register(name:String, email:String, pwd:String, callback:(Bool)->Void){
-        loggedIn = true;
-        callback(true);
+    func register(user:User, callback:(Bool)->Void){
+        modelFirebase.registerUser(user: user) {(success) in
+            if(success){
+                self.loggedIn = true;
+                callback(true);
+            }
+            else {callback(false)}
+        }
     }
 }
 

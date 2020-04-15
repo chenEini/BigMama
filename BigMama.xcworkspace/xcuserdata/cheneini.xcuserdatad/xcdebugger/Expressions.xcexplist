@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in ModelFirebase.getAllRecipes(since:callback:):ModelFirebase.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "json[&quot;id&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "json[&quot;title&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "recipeTableView">
+            </PersistentString>
+            <PersistentString
+               value = "document as FIRDataSnapshot">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Recipe.__allocating_init(json:):Recipe+Firebase.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "title">
+            </PersistentString>
+            <PersistentString
+               value = "json[&quot;lastUpdate&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -10,24 +10,33 @@ import Foundation
 import Firebase
 
 class ModelFirebase {
-    
-    func addUser(user:User){
+
+    func addUser(user:User, uid:String){
         let db = Firestore.firestore()
-        let json = user.toJson();
-        
-        db.collection("users").document(user.id).setData(json){
-            err in
+        db.collection("users").addDocument(data:["name":user.name, "uid":uid]){err in
             if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-                // ModelEvents.UserDataEvent.post();
+                print("Error saving user data: \(err)")
             }
         }
     }
     
+    func registerUser(user:User, callback:(Bool)->Void){
+        var error=""
+        Auth.auth().createUser(withEmail: user.email, password: user.pwd){ (result,err) in
+            if let err = err{
+                print("Error creating user: \(err)")
+                error = "Error creating user"
+            }
+            else{
+                self.addUser(user: user, uid:result!.user.uid)
+                
+            }
+        }
+        error != "" ? callback(false) : callback(true)
+    }
+    
     func upsertRecpie(recipe:Recipe){
-        recipe.id.isEmpty ? addRecipe(recipe: recipe) :  updateRecipe(recipe: recipe)
+            recipe.id.isEmpty ? addRecipe(recipe: recipe) :  updateRecipe(recipe: recipe)
     }
     
     func addRecipe(recipe:Recipe){

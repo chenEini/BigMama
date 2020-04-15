@@ -13,10 +13,20 @@ class User {
     
     let id:String
     var name:String = ""
+    var email:String = ""
+    var pwd:String = ""
     var avatar:String = ""
     var lastUpdate: Int64?
     
-    init(id:String=""){
+    init(id:String="", name:String, email:String, pwd:String){
+        self.id = id
+        self.name = name
+        self.email = email
+        self.pwd = pwd
+    }
+    
+    init(id:String="")
+    {
         self.id = id
     }
 }
