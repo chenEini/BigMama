@@ -10,14 +10,13 @@ import Foundation
 import Firebase
 
 class ModelFirebase {
-
-    func addUser(user:User, uid:String){
-        let db = Firestore.firestore()
-        db.collection("users").addDocument(data:["name":user.name, "uid":uid]){err in
-            if let err = err {
-                print("Error saving user data: \(err)")
-            }
-        }
+    
+    func getCurrentUserId()->String{
+        return "1" // TEMP
+    }
+    
+    func getCurrentUserName()->String{
+        return "Krutit" // TEMP
     }
     
     func registerUser(user:User, callback:(Bool)->Void){
@@ -29,7 +28,6 @@ class ModelFirebase {
             }
             else{
                 self.addUser(user: user, uid:result!.user.uid)
-                
             }
         }
         error != "" ? callback(false) : callback(true)
@@ -46,8 +44,21 @@ class ModelFirebase {
         error != "" ? callback(false) : callback(true)
     }
     
+    func addUser(user:User, uid:String){
+        let db = Firestore.firestore()
+        db.collection("users").addDocument(data:["name":user.name, "uid":uid]){err in
+            if let err = err {
+                print("Error saving user data: \(err)")
+            }
+        }
+    }
+    
+    func getUserRecipes(uid:String, callback: @escaping ([Recipe]?)->Void){
+       // return all user recipes from the DB
+    }
+    
     func upsertRecpie(recipe:Recipe){
-            recipe.id.isEmpty ? addRecipe(recipe: recipe) :  updateRecipe(recipe: recipe)
+        recipe.id.isEmpty ? addRecipe(recipe: recipe) : updateRecipe(recipe: recipe)
     }
     
     func addRecipe(recipe:Recipe){
@@ -83,23 +94,22 @@ class ModelFirebase {
     func getAllRecipes(since:Int64, callback: @escaping ([Recipe]?)->Void){
         let db = Firestore.firestore()
         
-        db.collection("recipes").order(by: "lastUpdate").start(at: [Timestamp(seconds: since, nanoseconds: 0)])
-            .getDocuments {(querySnapshot, err) in
-                if let err = err
-                {
-                    print("Error getting documents: \(err)")
-                    callback(nil);
+        db.collection("recipes").order(by:"lastUpdate").start(at:[Timestamp(seconds: since, nanoseconds: 0)]).getDocuments{(querySnapshot, err) in
+            if let err = err
+            {
+                print("Error getting documents: \(err)")
+                callback(nil);
+            }
+            else
+            {
+                var data = [Recipe]();
+                for document in querySnapshot!.documents {
+                    var json = document.data()
+                    json["id"] = document.documentID
+                    data.append(Recipe(json: json));
                 }
-                else
-                {
-                    var data = [Recipe]();
-                    for document in querySnapshot!.documents {
-                        var json = document.data()
-                        json["id"] = document.documentID
-                        data.append(Recipe(json: json));
-                    }
-                    callback(data);
-                }
+                callback(data);
+            }
         }
     }
 }

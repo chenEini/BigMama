@@ -14,29 +14,27 @@ class Model {
     static let instance = Model()
     
     var modelFirebase:ModelFirebase = ModelFirebase()
-    var firebaseStorage: FirebaseStorage = FirebaseStorage()
+    var modelFirebaseStorage: FirebaseStorage = FirebaseStorage()
     
     private init(){}
     
-    //func addUser(user:User){
-    //    modelFirebase.addUser(user: user);
-    //}
+    func getCurrentUserId()->String{
+        return modelFirebase.getCurrentUserId()
+    }
+    
+    func getCurrentUserName()->String{
+        return modelFirebase.getCurrentUserName()
+    }
     
     func upsertRecpie(recipe:Recipe){
         modelFirebase.upsertRecpie(recipe: recipe);
     }
     
-    func getCurrentUserId()->String{ // TEMP
-        return "1"
-    }
-    
-    func getCurrentUserName()->String{ // TEMP
-        return "user name"
-    }
-    
     func getAllRecipes(callback:@escaping ([Recipe]?)->Void){
         // get the last update date
-        let lastUpdate = Recipe.getLastUpdateDate();
+        // let lastUpdate = Recipe.getLastUpdateDate();
+        
+        let lastUpdate = Int64(0) // TEMP
         
         modelFirebase.getAllRecipes(since:lastUpdate) { (data) in
             var lastUpdate:Int64 = 0;
@@ -54,7 +52,7 @@ class Model {
     }
     
     func saveImage(image:UIImage, callback:@escaping (String)->Void) {
-        firebaseStorage.saveImage(image: image, callback: callback)
+        modelFirebaseStorage.saveImage(image: image, callback: callback)
     }
     
     //* Handle User Authentication *//

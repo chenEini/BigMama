@@ -63,6 +63,8 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         
         let recipe = Recipe(ownerId:Model.instance.getCurrentUserId());
         
+        recipe.ownerName = Model.instance.getCurrentUserName()
+        
         recipe.title = recipeTitle.text!
         recipe.steps = recipeSteps.text!
         
