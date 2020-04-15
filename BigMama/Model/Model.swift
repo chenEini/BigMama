@@ -20,9 +20,9 @@ class Model {
     
     private init(){}
     
-    func addUser(user:User){
-        modelFirebase.addUser(user: user);
-    }
+    //func addUser(user:User){
+    //    modelFirebase.addUser(user: user);
+    //}
     
     func upsertRecpie(recipe:Recipe){
         modelFirebase.upsertRecpie(recipe: recipe);
@@ -108,10 +108,13 @@ class Model {
     }
     
     func register(user:User, callback:(Bool)->Void){
-        
-        modelFirebase.registerUser(user: user)
-        loggedIn = true;
-        callback(true);
+        modelFirebase.registerUser(user: user) {(success) in
+            if(success){
+                self.loggedIn = true;
+                callback(true);
+            }
+            else {callback(false)}
+        }
     }
 }
 

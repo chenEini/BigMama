@@ -13,29 +13,45 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var nameTv: UITextField!
     @IBOutlet weak var emailTv: UITextField!
     @IBOutlet weak var pwdTv: UITextField!
+    @IBOutlet weak var msgLabel: UILabel!
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
+        
         pwdTv.isSecureTextEntry = true
+        msgLabel.alpha = 0
     }
     
-    @IBAction func register(_ sender: UIButton) {
-        Model.instance.register(name: nameTv.text!, email: emailTv.text!, pwd: pwdTv.text!) {(success) in
-            if(success){
-                //go back when register
-                self.navigationController?.popViewController(animated: true)
-                self.navigationController?.popViewController(animated: true)
+    @IBAction func register(_ sender: UIButton){
+        let error = validateFields()
+        if error != nil{
+            showMsg(error!)
+        }
+        else{
+            let new_user = User(name: nameTv.text!, email: emailTv.text!, pwd: pwdTv.text!)
+            Model.instance.register(user:new_user){(success) in
+                if(success){
+                    self.navigationController?.popViewController(animated: true)
+                    self.navigationController?.popViewController(animated: true)
+                }
+                else{
+                    showMsg("Registration failed")
+                }
             }
         }
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func validateFields() -> String?{
+        if nameTv.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            emailTv.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            pwdTv.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            return "Please fill in all fields"
+        }
+        return nil
+    }
+    
+    func showMsg(_ message:String){
+        msgLabel.text = message
+        msgLabel.alpha = 1
+    }
 }

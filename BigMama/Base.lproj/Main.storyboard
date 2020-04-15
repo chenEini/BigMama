@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xuv-sV-LZ3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xuv-sV-LZ3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -336,8 +336,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Udd-ez-vTt">
-                                <rect key="frame" x="190" y="540" width="34" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Udd-ez-vTt" userLabel="Msg Label">
+                                <rect key="frame" x="97" y="542" width="220" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -350,7 +350,7 @@
                     <navigationItem key="navigationItem" id="TwJ-fZ-GgL"/>
                     <connections>
                         <outlet property="emailTv" destination="Flh-Ot-Rxm" id="M7H-Mv-kRJ"/>
-                        <outlet property="errorLabel" destination="Udd-ez-vTt" id="cDe-be-OlB"/>
+                        <outlet property="msgLabel" destination="Udd-ez-vTt" id="RBd-ce-z75"/>
                         <outlet property="nameTv" destination="7N7-0y-5ce" id="A5S-h9-Sdm"/>
                         <outlet property="pwdTv" destination="7eB-5t-gl0" id="Vql-WZ-ZvS"/>
                     </connections>
@@ -543,13 +543,13 @@
             <point key="canvasLocation" x="-797" y="-320"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AppLogo" width="555" height="440"/>
+        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
+        <image name="person.crop.circle" catalog="system" width="64" height="60"/>
+        <image name="square.grid.2x2.fill" catalog="system" width="64" height="56"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="QIN-jP-nOW"/>
     </inferredMetricsTieBreakers>
-    <resources>
-        <image name="AppLogo" width="555" height="440"/>
-        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="81"/>
-        <image name="person.crop.circle" catalog="system" width="128" height="121"/>
-        <image name="square.grid.2x2.fill" catalog="system" width="128" height="114"/>
-    </resources>
 </document>
