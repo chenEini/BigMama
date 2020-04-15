@@ -35,6 +35,17 @@ class ModelFirebase {
         error != "" ? callback(false) : callback(true)
     }
     
+    func signIn(email:String, pwd:String, callback:(Bool)->Void){
+        var error=""
+        Auth.auth().signIn(withEmail: email, password: pwd){
+            (result, err) in
+            if let err = err{
+                error = err.localizedDescription
+            }
+        }
+        error != "" ? callback(false) : callback(true)
+    }
+    
     func upsertRecpie(recipe:Recipe){
             recipe.id.isEmpty ? addRecipe(recipe: recipe) :  updateRecipe(recipe: recipe)
     }

@@ -66,8 +66,13 @@ class Model {
     }
     
     func logIn(email:String, pwd:String, callback:(Bool)->Void){
-        loggedIn = true;
-        callback(true);
+        modelFirebase.signIn(email: email, pwd: pwd) {(success) in
+            if(success){
+                loggedIn = true;
+                callback(true);
+            }
+            else {callback(false)}
+        }
     }
     
     func logOut(){

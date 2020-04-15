@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailTv: UITextField!
     @IBOutlet weak var pwdTv: UITextField!
-    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var msgLabel: UILabel!
     
     static func factory()->LoginViewController{
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginViewController")
@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         pwdTv.isSecureTextEntry = true
-        errorLabel.alpha = 0
+        msgLabel.alpha = 0
         
         //hook to the navigation back button
         self.navigationItem.hidesBackButton = true
@@ -46,19 +46,39 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func login(_ sender: UIButton) {
-        Model.instance.logIn(email: emailTv.text!, pwd: pwdTv.text!) { (success) in
-            if(success){
+        let error = validateFields()
+        if error != nil{
+            showMsg(error!)
+        }
+        else{
+            Model.instance.logIn(email: emailTv.text!, pwd: pwdTv.text!){(success) in
+                if(success){
                 //go back when logged in
-                self.navigationController?.popViewController(animated: true)
-                if let delegate = delegate{
-                    delegate.onLoginSuccess()
+                    self.navigationController?.popViewController(animated: true)
+                    if let delegate = delegate{
+                        delegate.onLoginSuccess()
+                    }
+                }
+                else{
+                    showMsg("Login failed")
                 }
             }
         }
     }
     
+    func validateFields() -> String?{
+        if emailTv.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            pwdTv.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            return "Please fill in all fields"
+        }
+        return nil
+    }
     
-    
+    func showMsg(_ message:String){
+        msgLabel.text = message
+        msgLabel.alpha = 1
+    }
+
     //   override func viewDidAppear(_ animated: Bool) {
     //       super.viewDidAppear(animated)
     //   }
