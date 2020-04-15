@@ -16,6 +16,7 @@ class Model {
     // var modelSql:ModelSql = ModelSql.instance
     
     var modelFirebase:ModelFirebase = ModelFirebase()
+    var firebaseStorage: FirebaseStorage = FirebaseStorage()
     
     private init(){}
     
@@ -86,7 +87,7 @@ class Model {
     }
     
     func saveImage(image:UIImage, callback:@escaping (String)->Void) {
-        FirebaseStorage.saveImage(image: image, callback: callback)
+        firebaseStorage.saveImage(image: image, callback: callback)
     }
     
     //* Handle User Authentication *//
