@@ -106,7 +106,9 @@ class Model {
         loggedIn = false;
     }
     
-    func register(name:String, email:String, pwd:String, callback:(Bool)->Void){
+    func register(user:User, callback:(Bool)->Void){
+        
+        modelFirebase.registerUser(user: user)
         loggedIn = true;
         callback(true);
     }
