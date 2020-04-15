@@ -23,8 +23,8 @@ class Model {
         modelFirebase.addUser(user: user);
     }
     
-    func addRecipe(recipe:Recipe){
-        modelFirebase.addRecipe(recipe: recipe);
+    func upsertRecpie(recipe:Recipe){
+        modelFirebase.upsertRecpie(recipe: recipe);
     }
     
     func getCurrentUserId()->String{ // TEMP

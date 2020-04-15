@@ -26,6 +26,10 @@ class ModelFirebase {
         }
     }
     
+    func upsertRecpie(recipe:Recipe){
+        recipe.id.isEmpty ? addRecipe(recipe: recipe) :  updateRecipe(recipe: recipe)
+    }
+    
     func addRecipe(recipe:Recipe){
         let db = Firestore.firestore()
         let json = recipe.toJson();
@@ -58,7 +62,7 @@ class ModelFirebase {
     
     func getAllRecipes(since:Int64, callback: @escaping ([Recipe]?)->Void){
         let db = Firestore.firestore()
-       
+        
         db.collection("recipes").order(by: "lastUpdate").start(at: [Timestamp(seconds: since, nanoseconds: 0)])
             .getDocuments {(querySnapshot, err) in
                 if let err = err

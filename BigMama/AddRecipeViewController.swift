@@ -68,18 +68,20 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         recipe.steps = self.recipeSteps.text!
         
         guard let selectedImage = selectedImage else {
-            Model.instance.addRecipe(recipe: recipe);
-            newRecipe = recipe
-            performSegue(withIdentifier: "newRecipeViewSegue", sender: self)
+            upsertRecipe(recipe: recipe)
             return;
         }
         
         Model.instance.saveImage(image: selectedImage) { (url) in
             recipe.image = url;
-            Model.instance.addRecipe(recipe: recipe);
-            self.newRecipe = recipe
-            self.performSegue(withIdentifier: "newRecipeViewSegue", sender: self)
+            self.upsertRecipe(recipe: recipe)
         }
+    }
+    
+    func upsertRecipe(recipe:Recipe){
+        Model.instance.upsertRecpie(recipe: recipe);
+        self.newRecipe = recipe
+        self.performSegue(withIdentifier: "newRecipeViewSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
