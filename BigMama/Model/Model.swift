@@ -57,30 +57,31 @@ class Model {
     
     //* Handle User Authentication *//
     
-    var loggedIn = false
-    
-    func isLoggedIn()->Bool {
-        return loggedIn
-    }
-    
     func logIn(email:String, pwd:String, callback:(Bool)->Void){
         modelFirebase.signIn(email: email, pwd: pwd) {(success) in
             if(success){
-                loggedIn = true;
                 callback(true);
             }
             else {callback(false)}
         }
     }
     
-    func logOut(){
-        loggedIn = false;
+    func logOut(callback:(Bool)->Void){
+        modelFirebase.signOut() {(success) in
+            if(success){
+                callback(true)
+            }
+            else {callback(false)}
+        }
+    }
+    
+    func isLoggedIn()->Bool {
+        return modelFirebase.isLoggedIn()
     }
     
     func register(user:User, callback:(Bool)->Void){
         modelFirebase.registerUser(user: user) {(success) in
             if(success){
-                self.loggedIn = true;
                 callback(true);
             }
             else {callback(false)}

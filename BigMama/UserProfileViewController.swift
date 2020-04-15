@@ -9,15 +9,15 @@
 import UIKit
 
 class UserProfileViewController: UIViewController, LoginViewControllerDelegate {
-    
-    func onLoginSuccess() {
+     
+    func onLoginSuccess(){
     }
     
-    func onLoginCancell() {
+    func onLoginCancell(){
         self.tabBarController?.selectedIndex = 0;
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated);
         if(!Model.instance.isLoggedIn()){
             let loginVc = LoginViewController.factory()
@@ -26,10 +26,23 @@ class UserProfileViewController: UIViewController, LoginViewControllerDelegate {
         }
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
     }
     
+    
+    @IBAction func logout(_ sender: UIButton){
+        Model.instance.logOut() {(success) in
+            if (success){
+                onLogOut()
+            }
+        }
+    }
+    
+    func onLogOut(){
+        self.tabBarController?.selectedIndex = 0;
+    }
+
     /*
      // MARK: - Navigation
      

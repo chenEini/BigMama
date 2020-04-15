@@ -12,11 +12,13 @@ import Firebase
 class ModelFirebase {
     
     func getCurrentUserId()->String{
-        return "1" // TEMP
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        return uid
     }
     
     func getCurrentUserName()->String{
-        return "Krutit" // TEMP
+        let name = Auth.auth().currentUser?.displayName ?? ""
+        return name
     }
     
     func registerUser(user:User, callback:(Bool)->Void){
@@ -42,6 +44,21 @@ class ModelFirebase {
             }
         }
         error != "" ? callback(false) : callback(true)
+    }
+    
+    func signOut(callback:(Bool)->Void){
+        var error=""
+        do{
+            try Auth.auth().signOut()
+        }catch let signOutError as NSError{
+            print("Error signing out: \(signOutError)")
+            error = "Error signing out"
+        }
+        error != "" ? callback(false) : callback(true)
+    }
+    
+    func isLoggedIn() -> Bool {
+        return (Auth.auth().currentUser) != nil
     }
     
     func addUser(user:User, uid:String){
