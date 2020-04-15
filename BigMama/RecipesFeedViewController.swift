@@ -10,12 +10,19 @@ import UIKit
 
 class RecipesFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var recipeTableView: UITableView!
+    
     var data = [Recipe]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        data = Model.instance.getAllLocalRecipes()
+                
+        Model.instance.getAllRecipes{(data:[Recipe]?) in
+            if data != nil{
+                self.data = data!
+                self.recipeTableView.reloadData()
+            }
+        }
     }
     
     var selectedRecipe:Recipe?

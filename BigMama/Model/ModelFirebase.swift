@@ -74,16 +74,12 @@ class ModelFirebase {
                 {
                     var data = [Recipe]();
                     for document in querySnapshot!.documents {
-                        if let ts = document.data()["lastUpdate"] as? Timestamp{
-                            let tsDate = ts.dateValue();
-                            print("\(tsDate)");
-                            let tsDouble = tsDate.timeIntervalSince1970;
-                            print("\(tsDouble)");
-                        }
-                        data.append(Recipe(json: document.data()));
+                        var json = document.data()
+                        json["id"] = document.documentID
+                        data.append(Recipe(json: json));
                     }
                     callback(data);
                 }
-        };
+        }
     }
 }

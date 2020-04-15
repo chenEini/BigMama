@@ -13,8 +13,6 @@ class Model {
     
     static let instance = Model()
     
-    // var modelSql:ModelSql = ModelSql.instance
-    
     var modelFirebase:ModelFirebase = ModelFirebase()
     
     private init(){}
@@ -35,37 +33,6 @@ class Model {
         return "user name"
     }
     
-    func getAllLocalRecipes() ->[Recipe]{  //TEMP
-        var data = [Recipe]()
-        
-        let pancakes = Recipe(id: "1", ownerId: "1")
-        pancakes.ownerName = "Chen"
-        pancakes.title = "Pancakes"
-        pancakes.steps = "Add 2 eggs and one cup of sugar"
-        
-        let cake = Recipe(id: "2", ownerId: "2")
-        cake.ownerName = "Kamil"
-        cake.title = "Cake"
-        cake.steps = "Add 2 eggs and one cup of sugar"
-        
-        let maffin = Recipe(id: "3", ownerId: "3")
-        maffin.ownerName = "Chen"
-        maffin.title = "Maffin"
-        maffin.steps = "Add 2 eggs and one cup of sugar"
-        
-        let cookie = Recipe(id: "4", ownerId: "4")
-        cookie.ownerName = "Kamil"
-        cookie.title = "Cookie"
-        cookie.steps = "Add 2 eggs and one cup of sugar"
-        
-        data.append(pancakes)
-        data.append(cake)
-        data.append(maffin)
-        data.append(cookie)
-        
-        return data
-    }
-    
     func getAllRecipes(callback:@escaping ([Recipe]?)->Void){
         // get the last update date
         let lastUpdate = Recipe.getLastUpdateDate();
@@ -73,15 +40,15 @@ class Model {
         modelFirebase.getAllRecipes(since:lastUpdate) { (data) in
             var lastUpdate:Int64 = 0;
             for recipe in data!{
-                recipe.addToDb()  // insert to the local db
+                // recipe.addToDb() // insert to the local db
                 if recipe.lastUpdate! > lastUpdate {lastUpdate = recipe.lastUpdate!}
             }
-            //update the recipes local last update date
+            // update the recipes local last update date
             Recipe.setLastUpdate(lastUpdated: lastUpdate)
             
             // get the complete recipe list
-            let finalData = Recipe.getAllRecipesFromDb()
-            callback(finalData);
+            // let finalData = Recipe.getAllRecipesFromDb()
+            callback(data);
         }
     }
     

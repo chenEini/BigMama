@@ -14,13 +14,12 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
     @IBOutlet weak var recipeSteps: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageBtn: UIButton!
-    @IBOutlet weak var addBtn: UIButton!
+    @IBOutlet weak var saveBtn: UIButton!
     
     func onLoginSuccess() {
     }
     
     func onLoginCancell() {
-        //self.navigationController?.popViewController(animated: true);
         self.tabBarController?.selectedIndex = 0;
     }
     
@@ -58,14 +57,14 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
     
     var newRecipe:Recipe?
     
-    @IBAction func add(_ sender: Any) {
-        addBtn.isEnabled = false;
+    @IBAction func save(_ sender: Any) {
+        saveBtn.isEnabled = false;
         imageBtn.isEnabled = false;
         
         let recipe = Recipe(ownerId:Model.instance.getCurrentUserId());
         
-        recipe.title = self.recipeTitle.text!
-        recipe.steps = self.recipeSteps.text!
+        recipe.title = recipeTitle.text!
+        recipe.steps = recipeSteps.text!
         
         guard let selectedImage = selectedImage else {
             upsertRecipe(recipe: recipe)
@@ -80,14 +79,16 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
     
     func upsertRecipe(recipe:Recipe){
         Model.instance.upsertRecpie(recipe: recipe);
-        self.newRecipe = recipe
-        self.performSegue(withIdentifier: "newRecipeViewSegue", sender: self)
+        self.clear()
+        self.tabBarController?.selectedIndex = 0;
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "newRecipeViewSegue"){
-            let vc:RecipeViewController = segue.destination as! RecipeViewController
-            vc.recipe = newRecipe
-        }
+    func clear(){
+        recipeTitle.text = ""
+        recipeSteps.text = ""
+        imageView.image = nil
+        selectedImage = nil
+        imageBtn.isEnabled = true;
+        saveBtn.isEnabled = true;
     }
 }

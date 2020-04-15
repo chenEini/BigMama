@@ -88,6 +88,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="hDM-M6-grQ"/>
                     <connections>
+                        <outlet property="recipeTableView" destination="6LN-Hu-3Ab" id="mUT-pU-1wr"/>
                         <segue destination="XDZ-rq-tMr" kind="show" identifier="recipeViewSegue" id="Lhe-hQ-8rx"/>
                     </connections>
                 </viewController>
@@ -150,7 +151,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Save"/>
                                 <connections>
-                                    <action selector="add:" destination="vRu-uO-i2j" eventType="touchUpInside" id="FxU-pb-Bos"/>
+                                    <action selector="save:" destination="vRu-uO-i2j" eventType="touchUpInside" id="RW2-wS-8kL"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upload Recipe Image :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVc-dL-1rm">
@@ -166,12 +167,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="5J4-PV-HiR"/>
                     <connections>
-                        <outlet property="addBtn" destination="Cdk-rL-0ov" id="gFU-PU-hli"/>
                         <outlet property="imageBtn" destination="Viu-fn-0WS" id="xvV-3w-Cg0"/>
                         <outlet property="imageView" destination="AY7-37-TT2" id="pVZ-b6-em0"/>
                         <outlet property="recipeSteps" destination="9JC-jh-6dN" id="40B-4Y-rNg"/>
                         <outlet property="recipeTitle" destination="4E6-jk-6ba" id="d3q-UP-M9W"/>
-                        <segue destination="XDZ-rq-tMr" kind="show" identifier="newRecipeViewSegue" id="dSo-QF-ImR"/>
+                        <outlet property="saveBtn" destination="Cdk-rL-0ov" id="a7e-cI-qGA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvj-fv-UFX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -544,7 +544,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QIN-jP-nOW"/>
+        <segue reference="Lhe-hQ-8rx"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AppLogo" width="555" height="440"/>
