@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xuv-sV-LZ3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xuv-sV-LZ3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -88,6 +88,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="hDM-M6-grQ"/>
                     <connections>
+                        <outlet property="recipeTableView" destination="6LN-Hu-3Ab" id="ubC-yk-1Je"/>
                         <segue destination="XDZ-rq-tMr" kind="show" identifier="recipeViewSegue" id="Lhe-hQ-8rx"/>
                     </connections>
                 </viewController>
@@ -151,6 +152,7 @@
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="add:" destination="vRu-uO-i2j" eventType="touchUpInside" id="FxU-pb-Bos"/>
+                                    <action selector="save:" destination="vRu-uO-i2j" eventType="touchUpInside" id="x3v-l9-ZaS"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upload Recipe Image :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVc-dL-1rm">
@@ -171,6 +173,7 @@
                         <outlet property="imageView" destination="AY7-37-TT2" id="pVZ-b6-em0"/>
                         <outlet property="recipeSteps" destination="9JC-jh-6dN" id="40B-4Y-rNg"/>
                         <outlet property="recipeTitle" destination="4E6-jk-6ba" id="d3q-UP-M9W"/>
+                        <outlet property="saveBtn" destination="Cdk-rL-0ov" id="dg1-OE-iO6"/>
                         <segue destination="XDZ-rq-tMr" kind="show" identifier="newRecipeViewSegue" id="dSo-QF-ImR"/>
                     </connections>
                 </viewController>
@@ -543,13 +546,13 @@
             <point key="canvasLocation" x="-797" y="-320"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="dSo-QF-ImR"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="AppLogo" width="555" height="440"/>
-        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
-        <image name="person.crop.circle" catalog="system" width="64" height="60"/>
-        <image name="square.grid.2x2.fill" catalog="system" width="64" height="56"/>
+        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="81"/>
+        <image name="person.crop.circle" catalog="system" width="128" height="121"/>
+        <image name="square.grid.2x2.fill" catalog="system" width="128" height="114"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="QIN-jP-nOW"/>
-    </inferredMetricsTieBreakers>
 </document>
