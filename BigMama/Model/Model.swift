@@ -32,7 +32,7 @@ class Model {
     
     func getAllRecipes(callback:@escaping ([Recipe]?)->Void){
         // get the last update date
-        // let lastUpdate = Recipe.getLastUpdateDate();
+//         let lastUpdate = Recipe.getLastUpdateDate();
         
         let lastUpdate = Int64(0) // TEMP
         

@@ -11,6 +11,8 @@ import Firebase
 
 class ModelFirebase {
     
+    lazy var db = Firestore.firestore()
+    
     func getCurrentUserId()->String{
         return "1" // TEMP
     }
@@ -45,7 +47,6 @@ class ModelFirebase {
     }
     
     func addUser(user:User, uid:String){
-        let db = Firestore.firestore()
         db.collection("users").addDocument(data:["name":user.name, "uid":uid]){err in
             if let err = err {
                 print("Error saving user data: \(err)")
@@ -54,7 +55,7 @@ class ModelFirebase {
     }
     
     func getUserRecipes(uid:String, callback: @escaping ([Recipe]?)->Void){
-       // return all user recipes from the DB
+        // return all user recipes from the DB
     }
     
     func upsertRecpie(recipe:Recipe){
@@ -62,7 +63,6 @@ class ModelFirebase {
     }
     
     func addRecipe(recipe:Recipe){
-        let db = Firestore.firestore()
         let json = recipe.toJson();
         
         db.collection("recipes").addDocument(data: json){
@@ -77,7 +77,6 @@ class ModelFirebase {
     }
     
     func updateRecipe(recipe:Recipe){
-        let db = Firestore.firestore()
         let json = recipe.toJson();
         
         db.collection("recipes").document(recipe.id).setData(json){
@@ -92,24 +91,28 @@ class ModelFirebase {
     }
     
     func getAllRecipes(since:Int64, callback: @escaping ([Recipe]?)->Void){
-        let db = Firestore.firestore()
-        
-        db.collection("recipes").order(by:"lastUpdate").start(at:[Timestamp(seconds: since, nanoseconds: 0)]).getDocuments{(querySnapshot, err) in
-            if let err = err
-            {
-                print("Error getting documents: \(err)")
-                callback(nil);
-            }
-            else
-            {
-                var data = [Recipe]();
-                for document in querySnapshot!.documents {
-                    var json = document.data()
-                    json["id"] = document.documentID
-                    data.append(Recipe(json: json));
+        db.collection("recipes")
+            .order(by:"lastUpdate")
+            .start(at:[Timestamp(seconds: since, nanoseconds: 0)])
+            .addSnapshotListener{(querySnapshot, err) in
+                
+                if let err = err
+                {
+                    print("Error getting documents: \(err)")
+                    callback(nil);
                 }
-                callback(data);
-            }
+                else
+                {
+                    var data = [Recipe]();
+                    for document in querySnapshot!.documents {
+                        if !document.metadata.hasPendingWrites {
+                            var json = document.data()
+                            json["id"] = document.documentID
+                            data.append(Recipe(json: json));
+                        }
+                    }
+                    callback(data);
+                }
         }
     }
 }
