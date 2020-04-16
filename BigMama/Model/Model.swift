@@ -32,7 +32,7 @@ class Model {
     
     func getAllRecipes(callback:@escaping ([Recipe]?)->Void){
         // get the last update date
-//         let lastUpdate = Recipe.getLastUpdateDate();
+        // let lastUpdate = Recipe.getLastUpdateDate();
         
         let lastUpdate = Int64(0) // TEMP
         
@@ -50,6 +50,14 @@ class Model {
             callback(data);
         }
     }
+    
+    
+    func getUserRecipes(callback:@escaping ([Recipe]?)->Void){
+        modelFirebase.getUserRecipes(uid: "1") { (data) in
+            callback(data);
+        }
+    }
+    
     
     func saveImage(image:UIImage, callback:@escaping (String)->Void) {
         modelFirebaseStorage.saveImage(image: image, callback: callback)

@@ -14,12 +14,12 @@ class ModelFirebase {
     lazy var db = Firestore.firestore()
     
     func getCurrentUserId()->String{
-        let uid = Auth.auth().currentUser?.uid ?? ""
+        let uid = Auth.auth().currentUser?.uid ?? "1"
         return uid
     }
     
     func getCurrentUserName()->String{
-        let name = Auth.auth().currentUser?.displayName ?? ""
+        let name = Auth.auth().currentUser?.displayName ?? "default user name"
         return name
     }
     
@@ -73,6 +73,25 @@ class ModelFirebase {
     
     func getUserRecipes(uid:String, callback: @escaping ([Recipe]?)->Void){
         // return all user recipes from the DB
+        db.collection("recipes").addSnapshotListener{(querySnapshot, err) in
+                       if let err = err
+                       {
+                           print("Error getting documents: \(err)")
+                           callback(nil);
+                       }
+                       else
+                       {
+                           var data = [Recipe]();
+                           for document in querySnapshot!.documents {
+                               if !document.metadata.hasPendingWrites {
+                                   var json = document.data()
+                                   json["id"] = document.documentID
+                                   data.append(Recipe(json: json));
+                               }
+                           }
+                           callback(data);
+                       }
+               }
     }
     
     func upsertRecpie(recipe:Recipe){
