@@ -16,11 +16,24 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
     @IBOutlet weak var imageBtn: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
     
+    var recipe:Recipe?
+    
     func onLoginSuccess() {
     }
     
     func onLoginCancell() {
         self.tabBarController?.selectedIndex = 0;
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if (recipe != nil)
+        {
+            recipeTitle.text = recipe?.title
+            imageView.image = UIImage(named: "maffin") // TEMP
+            recipeSteps.text = recipe?.steps
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,10 +44,6 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
             loginVc.delegate = self
             show(loginVc, sender: self)
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
     
     var selectedImage:UIImage?;
@@ -55,34 +64,40 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         dismiss(animated: true, completion: nil);
     }
     
-    var newRecipe:Recipe?
-    
     @IBAction func save(_ sender: Any) {
         saveBtn.isEnabled = false;
         imageBtn.isEnabled = false;
         
-        let recipe = Recipe(ownerId:Model.instance.getCurrentUserId());
+        if (recipe == nil){
+            recipe = Recipe(ownerId:Model.instance.getCurrentUserId());
+            recipe?.ownerName = Model.instance.getCurrentUserName()
+        }
         
-        recipe.ownerName = Model.instance.getCurrentUserName()
-        
-        recipe.title = recipeTitle.text!
-        recipe.steps = recipeSteps.text!
+        recipe?.title = recipeTitle.text!
+        recipe?.steps = recipeSteps.text!
         
         guard let selectedImage = selectedImage else {
-            upsertRecipe(recipe: recipe)
+            self.upsertRecipe(recipe: recipe!)
             return;
         }
         
         Model.instance.saveImage(image: selectedImage) { (url) in
-            recipe.image = url;
-            self.upsertRecipe(recipe: recipe)
+            self.recipe?.image = url;
+            self.upsertRecipe(recipe: self.recipe!)
         }
     }
     
     func upsertRecipe(recipe:Recipe){
         Model.instance.upsertRecpie(recipe: recipe);
         self.clear()
-        self.tabBarController?.selectedIndex = 0;
+        
+        if(self.tabBarController?.selectedIndex == 0)
+        {
+            self.navigationController?.popViewController(animated: true)
+        }
+        else{
+            self.tabBarController?.selectedIndex = 0;
+        }
     }
     
     func clear(){

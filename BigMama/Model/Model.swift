@@ -58,6 +58,13 @@ class Model {
         }
     }
     
+    func updateRecipe(recipe:Recipe){
+        // Update the db and firebase
+    }
+    
+    func deleteRecipe(recipe:Recipe){
+        // Delete from db and firebase
+    }
     
     func saveImage(image:UIImage, callback:@escaping (String)->Void) {
         modelFirebaseStorage.saveImage(image: image, callback: callback)
@@ -100,8 +107,8 @@ class Model {
 //* Handle Events *//
 
 class ModelEvents{
-    static let LoggingStateChangeEvent = EventNotificationBase(eventName: "LoggingStateChangeEvent");
-    static let CommentsDataEvent = StringEventNotificationBase<String>(eventName: "CommentsDataEvent");
+    static let LoggingStateChangeEvent = EventNotificationBase(eventName:"LoggingStateChangeEvent");
+    static let RecipesDataEvent = EventNotificationBase(eventName:"RecipesDataEvent");
     
     private init(){}
 }
