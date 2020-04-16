@@ -65,7 +65,7 @@ class ModelFirebase {
     }
     
     func addUser(user:User, uid:String){
-        db.collection("users").addDocument(data:["name":user.name, "uid":uid]){err in
+        db.collection("users").addDocument(data:["name":user.name, "uid":uid, "avatar":user.avatar]){err in
             if let err = err {
                 print("Error saving user data: \(err)")
             }
