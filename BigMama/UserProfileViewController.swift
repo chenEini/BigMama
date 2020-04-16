@@ -19,15 +19,14 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        let currentUserId = Model.instance.getCurrentUserId()
-
+        userName.text = Model.instance.getCurrentUserName()
         avatar.image = UIImage(named: "avatar")
 //        if (currentUser?.avatar != "")
 //        {
 //            avatar.kf.setImage(with: URL(string: currentUser!.avatar));
 //        }
         
-        Model.instance.getUserRecipes(uid: currentUserId){(data:[Recipe]?) in
+        Model.instance.getUserRecipes{(data:[Recipe]?) in
             if data != nil{
                 self.data = data!
                 self.recipeTableView.reloadData()

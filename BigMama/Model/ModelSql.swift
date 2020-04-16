@@ -28,8 +28,7 @@ class ModelSql{
         
         create();
         
-        //User.createTable(database: database);
-        //Recipe.createTable(database: database);
+        Recipe.createTable(database: database);
     }
     
     deinit {

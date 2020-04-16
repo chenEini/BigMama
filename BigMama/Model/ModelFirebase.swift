@@ -14,7 +14,7 @@ class ModelFirebase {
     lazy var db = Firestore.firestore()
     
     func getCurrentUserId()->String{
-        let uid = Auth.auth().currentUser?.uid ?? "1"
+        let uid = Auth.auth().currentUser?.uid ?? ""
         return uid
     }
     
@@ -26,11 +26,11 @@ class ModelFirebase {
     func registerUser(user:User, callback:(Bool)->Void){
         var error=""
         Auth.auth().createUser(withEmail: user.email, password: user.pwd){ (result,err) in
-            if let err = err{
+            if let err = err {
                 print("Error creating user: \(err)")
                 error = "Error creating user"
             }
-            else{
+            else {
                 self.addUser(user: user, uid:result!.user.uid)
             }
         }
@@ -41,7 +41,7 @@ class ModelFirebase {
         var error=""
         Auth.auth().signIn(withEmail: email, password: pwd){
             (result, err) in
-            if let err = err{
+            if let err = err {
                 error = err.localizedDescription
             }
         }
@@ -50,9 +50,10 @@ class ModelFirebase {
     
     func signOut(callback:(Bool)->Void){
         var error=""
-        do{
+        do {
             try Auth.auth().signOut()
-        }catch let signOutError as NSError{
+        }
+        catch let signOutError as NSError {
             print("Error signing out: \(signOutError)")
             error = "Error signing out"
         }
@@ -71,29 +72,6 @@ class ModelFirebase {
         }
     }
     
-    func getUserRecipes(uid:String, callback: @escaping ([Recipe]?)->Void){
-        // return all user recipes from the DB
-        db.collection("recipes").addSnapshotListener{(querySnapshot, err) in
-            if let err = err
-            {
-                print("Error getting documents: \(err)")
-                callback(nil);
-            }
-            else
-            {
-                var data = [Recipe]();
-                for document in querySnapshot!.documents {
-                    if !document.metadata.hasPendingWrites {
-                        var json = document.data()
-                        json["id"] = document.documentID
-                        data.append(Recipe(json: json));
-                    }
-                }
-                callback(data);
-            }
-        }
-    }
-    
     func upsertRecpie(recipe:Recipe){
         recipe.id.isEmpty ? addRecipe(recipe: recipe) : updateRecipe(recipe: recipe)
     }
@@ -107,7 +85,6 @@ class ModelFirebase {
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
-                // ModelEvents.RecipeDataEvent.post();
             }
         }
     }
@@ -121,7 +98,6 @@ class ModelFirebase {
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
-                // ModelEvents.RecipeDataEvent.post();
             }
         }
     }
@@ -137,11 +113,11 @@ class ModelFirebase {
     }
     
     func getAllRecipes(since:Int64, callback: @escaping ([Recipe]?)->Void){
+        let db = Firestore.firestore()
         db.collection("recipes")
             .order(by:"lastUpdate")
             .start(at:[Timestamp(seconds: since, nanoseconds: 0)])
             .addSnapshotListener{(querySnapshot, err) in
-                
                 if let err = err
                 {
                     print("Error getting documents: \(err)")
@@ -157,6 +133,7 @@ class ModelFirebase {
                             data.append(Recipe(json: json));
                         }
                     }
+                    // ModelEvents.RecipeDataEvent.post();
                     callback(data);
                 }
         }

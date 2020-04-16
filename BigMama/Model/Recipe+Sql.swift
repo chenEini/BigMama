@@ -19,7 +19,7 @@ extension Recipe{
         }
     }
     
-    func addToDb(){
+    func upsertToDb(){
         var sqlite3_stmt: OpaquePointer? = nil
         if (sqlite3_prepare_v2(ModelSql.instance.database,"INSERT OR REPLACE INTO RECIPES(R_ID, O_ID, O_NAME, TITLE, IMAGE, STEPS) VALUES (?,?,?,?,?,?);",-1, &sqlite3_stmt,nil) == SQLITE_OK){
             
@@ -31,11 +31,11 @@ extension Recipe{
             let steps = self.steps.cString(using: .utf8)
             
             sqlite3_bind_text(sqlite3_stmt, 1, id,-1,nil);
-            sqlite3_bind_text(sqlite3_stmt, 1, ownerId,-1,nil);
-            sqlite3_bind_text(sqlite3_stmt, 1, ownerName,-1,nil);
-            sqlite3_bind_text(sqlite3_stmt, 2, title,-1,nil);
-            sqlite3_bind_text(sqlite3_stmt, 3, image,-1,nil);
-            sqlite3_bind_text(sqlite3_stmt, 4, steps,-1,nil);
+            sqlite3_bind_text(sqlite3_stmt, 2, ownerId,-1,nil);
+            sqlite3_bind_text(sqlite3_stmt, 3, ownerName,-1,nil);
+            sqlite3_bind_text(sqlite3_stmt, 4, title,-1,nil);
+            sqlite3_bind_text(sqlite3_stmt, 5, image,-1,nil);
+            sqlite3_bind_text(sqlite3_stmt, 6, steps,-1,nil);
             
             if(sqlite3_step(sqlite3_stmt) == SQLITE_DONE){
                 print("new row added succefully")
@@ -44,12 +44,18 @@ extension Recipe{
         sqlite3_finalize(sqlite3_stmt)
     }
     
-    func upsertToDb(){
-        
-    }
-    
     func deleteFromDb(){
-        
+        var sqlite3_stmt: OpaquePointer? = nil
+        if (sqlite3_prepare_v2(ModelSql.instance.database,"DELETE FROM RECIPES WHERE R_ID=?;",-1, &sqlite3_stmt,nil) == SQLITE_OK){
+            
+            let id = self.id.cString(using: .utf8)
+            sqlite3_bind_text(sqlite3_stmt, 1, id,-1,nil);
+            
+            if(sqlite3_step(sqlite3_stmt) == SQLITE_DONE){
+                print("row was deleted succefully")
+            }
+        }
+        sqlite3_finalize(sqlite3_stmt)
     }
     
     static func getAllRecipesFromDb()->[Recipe]{
@@ -58,6 +64,34 @@ extension Recipe{
         
         if (sqlite3_prepare_v2(ModelSql.instance.database,"SELECT * from RECIPES;",-1,&sqlite3_stmt,nil)
             == SQLITE_OK){
+            while(sqlite3_step(sqlite3_stmt) == SQLITE_ROW){
+                
+                let recpieId = String(cString:sqlite3_column_text(sqlite3_stmt,0)!)
+                let ownerId = String(cString:sqlite3_column_text(sqlite3_stmt,1)!)
+                
+                let recipe = Recipe(id: recpieId, ownerId: ownerId);
+                
+                recipe.ownerName = String(cString:sqlite3_column_text(sqlite3_stmt,2)!)
+                recipe.title = String(cString:sqlite3_column_text(sqlite3_stmt,3)!)
+                recipe.image = String(cString:sqlite3_column_text(sqlite3_stmt,4)!)
+                recipe.steps = String(cString:sqlite3_column_text(sqlite3_stmt,5)!)
+                
+                data.append(recipe)
+            }
+        }
+        sqlite3_finalize(sqlite3_stmt)
+        return data
+    }
+    
+    static func getUserRecipesFromDb(uid: String)->[Recipe]{
+        var sqlite3_stmt: OpaquePointer? = nil
+        var data = [Recipe]()
+        
+        if (sqlite3_prepare_v2(ModelSql.instance.database,"SELECT * from RECIPES WHERE O_ID=?;",-1,&sqlite3_stmt,nil)
+            == SQLITE_OK){
+            
+            sqlite3_bind_text(sqlite3_stmt, 1, uid,-1,nil);
+            
             while(sqlite3_step(sqlite3_stmt) == SQLITE_ROW){
                 
                 let recpieId = String(cString:sqlite3_column_text(sqlite3_stmt,0)!)
