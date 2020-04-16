@@ -15,7 +15,7 @@ class FirebaseStorage {
     
     func saveImage(image:UIImage, callback:@escaping (String)->Void){
         let data = image.jpegData(compressionQuality: 0.5)
-        let imageRef = storageRef.child("imageName")
+        let imageRef = storageRef.child(UUID().uuidString)
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
         imageRef.putData(data!, metadata: nil) { (metadata, error) in
