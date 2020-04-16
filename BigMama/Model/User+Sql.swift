@@ -38,26 +38,6 @@ extension User{
         sqlite3_finalize(sqlite3_stmt)
     }
     
-    static func getAllUsersFromDb()->[User]{
-        var sqlite3_stmt: OpaquePointer? = nil
-        var data = [User]()
-        
-        if (sqlite3_prepare_v2(ModelSql.instance.database,"SELECT * from USERS;",-1,&sqlite3_stmt,nil)
-            == SQLITE_OK){
-            while(sqlite3_step(sqlite3_stmt) == SQLITE_ROW){
-                
-                let uId = String(cString:sqlite3_column_text(sqlite3_stmt,0)!)
-                let user = User(id: uId);
-                
-                user.name = String(cString:sqlite3_column_text(sqlite3_stmt,1)!)
-                user.avatar = String(cString:sqlite3_column_text(sqlite3_stmt,2)!)
-                data.append(user)
-            }
-        }
-        sqlite3_finalize(sqlite3_stmt)
-        return data
-    }
-    
     static func setLastUpdate(lastUpdated:Int64){
         return ModelSql.instance.setLastUpdate(name: "USERS", lastUpdated: lastUpdated);
     }

@@ -74,24 +74,24 @@ class ModelFirebase {
     func getUserRecipes(uid:String, callback: @escaping ([Recipe]?)->Void){
         // return all user recipes from the DB
         db.collection("recipes").addSnapshotListener{(querySnapshot, err) in
-                       if let err = err
-                       {
-                           print("Error getting documents: \(err)")
-                           callback(nil);
-                       }
-                       else
-                       {
-                           var data = [Recipe]();
-                           for document in querySnapshot!.documents {
-                               if !document.metadata.hasPendingWrites {
-                                   var json = document.data()
-                                   json["id"] = document.documentID
-                                   data.append(Recipe(json: json));
-                               }
-                           }
-                           callback(data);
-                       }
-               }
+            if let err = err
+            {
+                print("Error getting documents: \(err)")
+                callback(nil);
+            }
+            else
+            {
+                var data = [Recipe]();
+                for document in querySnapshot!.documents {
+                    if !document.metadata.hasPendingWrites {
+                        var json = document.data()
+                        json["id"] = document.documentID
+                        data.append(Recipe(json: json));
+                    }
+                }
+                callback(data);
+            }
+        }
     }
     
     func upsertRecpie(recipe:Recipe){
@@ -122,6 +122,16 @@ class ModelFirebase {
             } else {
                 print("Document successfully written!")
                 // ModelEvents.RecipeDataEvent.post();
+            }
+        }
+    }
+    
+    func deleteRecipe(recipe:Recipe){
+        db.collection("recipes").document(recipe.id).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
             }
         }
     }

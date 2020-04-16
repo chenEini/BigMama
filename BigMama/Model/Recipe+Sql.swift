@@ -44,6 +44,14 @@ extension Recipe{
         sqlite3_finalize(sqlite3_stmt)
     }
     
+    func upsertToDb(){
+        
+    }
+    
+    func deleteFromDb(){
+        
+    }
+    
     static func getAllRecipesFromDb()->[Recipe]{
         var sqlite3_stmt: OpaquePointer? = nil
         var data = [Recipe]()

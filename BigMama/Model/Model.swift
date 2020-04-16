@@ -28,6 +28,12 @@ class Model {
     
     func upsertRecpie(recipe:Recipe){
         modelFirebase.upsertRecpie(recipe: recipe);
+        recipe.upsertToDb()
+    }
+    
+    func deleteRecipe(recipe:Recipe){
+        modelFirebase.deleteRecipe(recipe: recipe);
+        recipe.deleteFromDb()
     }
     
     func getAllRecipes(callback:@escaping ([Recipe]?)->Void){
@@ -51,19 +57,10 @@ class Model {
         }
     }
     
-    
-    func getUserRecipes(callback:@escaping ([Recipe]?)->Void){
-        modelFirebase.getUserRecipes(uid: "1") { (data) in
+    func getUserRecipes(uid:String, callback:@escaping ([Recipe]?)->Void){
+        modelFirebase.getUserRecipes(uid: uid) { (data) in
             callback(data);
         }
-    }
-    
-    func updateRecipe(recipe:Recipe){
-        // Update the db and firebase
-    }
-    
-    func deleteRecipe(recipe:Recipe){
-        // Delete from db and firebase
     }
     
     func saveImage(image:UIImage, callback:@escaping (String)->Void) {
@@ -128,27 +125,5 @@ class EventNotificationBase{
     
     func post(){
         NotificationCenter.default.post(name: NSNotification.Name(eventName),object: self,userInfo: nil)
-    }
-}
-
-class StringEventNotificationBase<T>{
-    let eventName:String;
-    
-    init(eventName:String){
-        self.eventName = eventName;
-    }
-    
-    func observe(callback:@escaping (T)->Void){
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(eventName),
-                                               object: nil, queue: nil) { (data) in
-                                                let strData = data.userInfo!["data"] as! T
-                                                callback(strData);
-        }
-    }
-    
-    func post(data:T){
-        NotificationCenter.default.post(name: NSNotification.Name(eventName),
-                                        object: self,
-                                        userInfo: ["data":data]);
     }
 }
