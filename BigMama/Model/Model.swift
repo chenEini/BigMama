@@ -28,7 +28,6 @@ class Model {
     
     func upsertRecpie(recipe:Recipe){
         modelFirebase.upsertRecpie(recipe: recipe);
-        recipe.upsertToDb()
     }
     
     func deleteRecipe(recipe:Recipe){
@@ -37,30 +36,30 @@ class Model {
     }
     
     func getAllRecipes(callback:@escaping ([Recipe]?)->Void){
-        // get the last update date
-        // let lastUpdate = Recipe.getLastUpdateDate();
+        //get the last update date
+        let recipesLastUpdate = Recipe.getLastUpdateDate();
         
-        let lastUpdate = Int64(0) // TEMP
-        
-        modelFirebase.getAllRecipes(since:lastUpdate) { (data) in
+        modelFirebase.getAllRecipes(since:recipesLastUpdate) { (data) in
             var lastUpdate:Int64 = 0;
             for recipe in data!{
-                // recipe.addToDb() // insert to the local db
+                recipe.upsertToDb()
                 if recipe.lastUpdate! > lastUpdate {lastUpdate = recipe.lastUpdate!}
             }
+            
             // update the recipes local last update date
             Recipe.setLastUpdate(lastUpdated: lastUpdate)
             
             // get the complete recipe list
-            // let finalData = Recipe.getAllRecipesFromDb()
-            callback(data);
+            let finalData = Recipe.getAllRecipesFromDb()
+            
+            callback(finalData);
         }
     }
     
-    func getUserRecipes(uid:String, callback:@escaping ([Recipe]?)->Void){
-        modelFirebase.getUserRecipes(uid: uid) { (data) in
-            callback(data);
-        }
+    func getUserRecipes(callback:@escaping ([Recipe]?)->Void){
+        // get the user recipes list
+        let finalData = Recipe.getUserRecipesFromDb(uid: self.getCurrentUserId())
+        callback(finalData);
     }
     
     func saveImage(image:UIImage, callback:@escaping (String)->Void) {
