@@ -42,6 +42,7 @@ class RecipeViewController: UIViewController {
     @IBAction func deleteRecipe(_ sender: Any) {
         if (recipe != nil) {
             Model.instance.deleteRecipe(recipe:recipe!)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

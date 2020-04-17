@@ -48,7 +48,9 @@ class Model {
             
             // update the recipes local last update date
             Recipe.setLastUpdate(lastUpdated: lastUpdate)
-            
+           
+            ModelEvents.RecipesDataEvent.post();
+
             // get the complete recipe list
             let finalData = Recipe.getAllRecipesFromDb()
             

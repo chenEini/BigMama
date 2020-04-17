@@ -133,7 +133,6 @@ class ModelFirebase {
                             data.append(Recipe(json: json));
                         }
                     }
-                    // ModelEvents.RecipeDataEvent.post();
                     callback(data);
                 }
         }

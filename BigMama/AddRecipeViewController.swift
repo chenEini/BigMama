@@ -91,7 +91,7 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         Model.instance.upsertRecpie(recipe: recipe);
         self.clear()
         
-        if(self.tabBarController?.selectedIndex == 0)
+        if(self.tabBarController?.selectedIndex != 1)
         {
             self.navigationController?.popViewController(animated: true)
         }
