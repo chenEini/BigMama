@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xuv-sV-LZ3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xuv-sV-LZ3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +24,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gYL-yb-mIA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1833" y="-258"/>
+            <point key="canvasLocation" x="-1826" y="-189"/>
         </scene>
         <!--Recipe List-->
         <scene sceneID="tne-QT-ifu">
@@ -94,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="67" y="-964"/>
+            <point key="canvasLocation" x="67" y="-1027"/>
         </scene>
         <!--Add Recipe-->
         <scene sceneID="dol-Es-qhE">
@@ -142,8 +142,9 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cdk-rL-0ov">
-                                <rect key="frame" x="308" y="652" width="62" height="41"/>
+                                <rect key="frame" x="20" y="698" width="62" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="save:" destination="vRu-uO-i2j" eventType="touchUpInside" id="x3v-l9-ZaS"/>
@@ -156,12 +157,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9JC-jh-6dN">
-                                <rect key="frame" x="14" y="555" width="365" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9JC-jh-6dN">
+                                <rect key="frame" x="17" y="555" width="364" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="bnr-Wv-UO5">
+                                <rect key="frame" x="81" y="700" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="jes-Ca-4h0"/>
@@ -173,6 +178,7 @@
                         <outlet property="recipeSteps" destination="9JC-jh-6dN" id="40B-4Y-rNg"/>
                         <outlet property="recipeTitle" destination="4E6-jk-6ba" id="d3q-UP-M9W"/>
                         <outlet property="saveBtn" destination="Cdk-rL-0ov" id="dg1-OE-iO6"/>
+                        <outlet property="spinner" destination="bnr-Wv-UO5" id="yTy-Df-lWj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvj-fv-UFX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -194,7 +200,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FKs-Ei-Fhy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-797" y="320"/>
+            <point key="canvasLocation" x="-797" y="349"/>
         </scene>
         <!--Login-->
         <scene sceneID="OlE-JW-Jo5">
@@ -276,7 +282,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KHJ-fk-uYe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-797" y="992"/>
+            <point key="canvasLocation" x="-797" y="1027"/>
         </scene>
         <!--Register-->
         <scene sceneID="VU5-Io-ZLj">
@@ -350,7 +356,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zvr-gk-td0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="69.565217391304358" y="991.74107142857133"/>
+            <point key="canvasLocation" x="67" y="1027"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Ooi-5V-W11">
@@ -440,7 +446,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tuk-qj-Jky" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="66.666666666666671" y="319.41964285714283"/>
+            <point key="canvasLocation" x="67" y="349"/>
         </scene>
         <!--View Recipe-->
         <scene sceneID="BUA-K9-h8m">
@@ -541,7 +547,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yhE-g9-PhX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1749" y="-435"/>
+            <point key="canvasLocation" x="1243" y="-544"/>
         </scene>
         <!--Recipe Nav-->
         <scene sceneID="JFc-Vs-E5R">
@@ -558,7 +564,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RWx-Th-jCQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-797" y="-964"/>
+            <point key="canvasLocation" x="-797" y="-1027"/>
         </scene>
         <!--Add Recipe Nav-->
         <scene sceneID="pOV-PO-v0P">
@@ -578,16 +584,16 @@
             <point key="canvasLocation" x="-797" y="-320"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="AppLogo" width="555" height="440"/>
-        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
-        <image name="person.crop.circle" catalog="system" width="64" height="60"/>
-        <image name="square.and.pencil" catalog="system" width="64" height="58"/>
-        <image name="square.grid.2x2.fill" catalog="system" width="64" height="56"/>
-        <image name="trash" catalog="system" width="60" height="64"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="QIN-jP-nOW"/>
         <segue reference="iNZ-GF-lHc"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="AppLogo" width="555" height="440"/>
+        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="81"/>
+        <image name="person.crop.circle" catalog="system" width="128" height="121"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="118"/>
+        <image name="square.grid.2x2.fill" catalog="system" width="128" height="114"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
+    </resources>
 </document>

@@ -26,12 +26,11 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
 //            avatar.kf.setImage(with: URL(string: currentUser!.avatar));
 //        }
         
-        Model.instance.getUserRecipes{(data:[Recipe]?) in
-            if data != nil{
-                self.data = data!
-                self.recipeTableView.reloadData()
-            }
-        }
+        ModelEvents.RecipesDataEvent.observe {
+              self.getUserRecipes()
+          }
+          
+          getUserRecipes()
     }
     
     override func viewDidAppear(_ animated: Bool){
@@ -60,6 +59,15 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func logout(_ sender: UIButton){
         Model.instance.logOut(){(success) in
             if (success) { onLogOut() }
+        }
+    }
+    
+    func getUserRecipes(){
+        Model.instance.getUserRecipes{(data:[Recipe]?) in
+            if data != nil{
+                self.data = data!
+                self.recipeTableView.reloadData()
+            }
         }
     }
     

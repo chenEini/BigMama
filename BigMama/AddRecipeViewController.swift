@@ -15,6 +15,7 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageBtn: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     var recipe:Recipe?
     
@@ -27,7 +28,9 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
+        spinner.isHidden = true
+
         if (recipe != nil)
         {
             recipeTitle.text = recipe?.title
@@ -65,6 +68,8 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
     }
     
     @IBAction func save(_ sender: Any) {
+        spinner.isHidden = false
+
         saveBtn.isEnabled = false;
         imageBtn.isEnabled = false;
         
@@ -91,9 +96,9 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         Model.instance.upsertRecpie(recipe: recipe);
         self.clear()
         
-        if(self.tabBarController?.selectedIndex == 0)
+        if(self.tabBarController?.selectedIndex != 1)
         {
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
         }
         else{
             self.tabBarController?.selectedIndex = 0;
@@ -105,7 +110,8 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         recipeSteps.text = ""
         imageView.image = nil
         selectedImage = nil
-        imageBtn.isEnabled = true;
-        saveBtn.isEnabled = true;
+        imageBtn.isEnabled = true
+        saveBtn.isEnabled = true
+        spinner.isHidden = true
     }
 }
