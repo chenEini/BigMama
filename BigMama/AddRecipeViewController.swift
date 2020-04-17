@@ -93,7 +93,7 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         
         if(self.tabBarController?.selectedIndex != 1)
         {
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
         }
         else{
             self.tabBarController?.selectedIndex = 0;
