@@ -25,6 +25,12 @@ class User {
         self.pwd = pwd
     }
     
+    init(id:String="", name:String, avatar:String=""){
+        self.id = id
+        self.name = name
+        self.avatar = avatar
+    }
+    
     init(id:String="")
     {
         self.id = id
