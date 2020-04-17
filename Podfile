@@ -11,6 +11,7 @@ target 'BigMama' do
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Storage'
 	pod 'Firebase/Database'
+	pod 'Kingfisher', '~> 5.0'
 
   target 'BigMamaTests' do
     inherit! :search_paths
