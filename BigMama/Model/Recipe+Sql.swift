@@ -12,7 +12,7 @@ extension Recipe{
     
     static func createTable(database: OpaquePointer?){
         var errormsg: UnsafeMutablePointer<Int8>? = nil
-        let res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS RECIPES (R_ID TEXT PRIMARY KEY, O_ID TEXT, O_NAME TEXT, TITLE TEXT, IMAGE TEXT, STEPS TEXT)", nil, nil, &errormsg);
+        let res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS RECIPES (R_ID TEXT PRIMARY KEY, O_ID TEXT, O_NAME TEXT, TITLE TEXT, IMAGE TEXT, STEPS TEXT, LAST_UPDATE DOUBLE)", nil, nil, &errormsg);
         if(res != 0){
             print("error creating table");
             return
@@ -21,7 +21,7 @@ extension Recipe{
     
     func upsertToDb(){
         var sqlite3_stmt: OpaquePointer? = nil
-        if (sqlite3_prepare_v2(ModelSql.instance.database,"INSERT OR REPLACE INTO RECIPES(R_ID, O_ID, O_NAME, TITLE, IMAGE, STEPS) VALUES (?,?,?,?,?,?);",-1, &sqlite3_stmt,nil) == SQLITE_OK){
+        if (sqlite3_prepare_v2(ModelSql.instance.database,"INSERT OR REPLACE INTO RECIPES(R_ID, O_ID, O_NAME, TITLE, IMAGE, STEPS, LAST_UPDATE) VALUES (?,?,?,?,?,?,?);",-1, &sqlite3_stmt,nil) == SQLITE_OK){
             
             let id = self.id.cString(using: .utf8)
             let ownerId = self.ownerId.cString(using: .utf8)
@@ -29,6 +29,7 @@ extension Recipe{
             let title = self.title.cString(using: .utf8)
             let image = self.image.cString(using: .utf8)
             let steps = self.steps.cString(using: .utf8)
+            let lastUpdated = self.lastUpdate ?? 0
             
             sqlite3_bind_text(sqlite3_stmt, 1, id,-1,nil);
             sqlite3_bind_text(sqlite3_stmt, 2, ownerId,-1,nil);
@@ -36,6 +37,7 @@ extension Recipe{
             sqlite3_bind_text(sqlite3_stmt, 4, title,-1,nil);
             sqlite3_bind_text(sqlite3_stmt, 5, image,-1,nil);
             sqlite3_bind_text(sqlite3_stmt, 6, steps,-1,nil);
+            sqlite3_bind_int64(sqlite3_stmt, 7, lastUpdated);
             
             if(sqlite3_step(sqlite3_stmt) == SQLITE_DONE){
                 print("new row added succefully")
@@ -62,7 +64,7 @@ extension Recipe{
         var sqlite3_stmt: OpaquePointer? = nil
         var data = [Recipe]()
         
-        if (sqlite3_prepare_v2(ModelSql.instance.database,"SELECT * from RECIPES;",-1,&sqlite3_stmt,nil)
+        if (sqlite3_prepare_v2(ModelSql.instance.database,"SELECT * from RECIPES ORDER BY LAST_UPDATE DESC;",-1,&sqlite3_stmt,nil)
             == SQLITE_OK){
             while(sqlite3_step(sqlite3_stmt) == SQLITE_ROW){
                 
@@ -87,7 +89,7 @@ extension Recipe{
         var sqlite3_stmt: OpaquePointer? = nil
         var data = [Recipe]()
         
-        if (sqlite3_prepare_v2(ModelSql.instance.database,"SELECT * FROM RECIPES WHERE O_ID = ?;",-1,&sqlite3_stmt,nil) == SQLITE_OK){
+        if (sqlite3_prepare_v2(ModelSql.instance.database,"SELECT * FROM RECIPES WHERE O_ID = ? ORDER BY LAST_UPDATE DESC;",-1,&sqlite3_stmt,nil) == SQLITE_OK){
             
             let ownerId = uid.cString(using: .utf8)
             sqlite3_bind_text(sqlite3_stmt, 1, ownerId,-1,nil);
