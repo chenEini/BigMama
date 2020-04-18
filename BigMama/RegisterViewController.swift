@@ -19,18 +19,12 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-    
     override func viewDidLoad(){
         super.viewDidLoad()
         
         spinner.isHidden = true
         pwdTv.isSecureTextEntry = true
         msgLabel.alpha = 0
-        
-        ModelEvents.RegisterStateChangeEvent.observe {
-            self.navigationController?.popViewController(animated: true)
-            self.navigationController?.popViewController(animated: true)
-        }
     }
     
     var selectedImage:UIImage?
@@ -57,9 +51,7 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         spinner.isHidden = false
         
         let error = validateFields()
-        if error != nil{
-            showMsg(error!)
-        }
+        if error != nil { showMsg(error!) }
         else{
             let new_user = User(name: nameTv.text!, email: emailTv.text!, pwd: pwdTv.text!)
             guard let selectedImage = selectedImage else {
@@ -72,14 +64,17 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
                 self.regAddition(user: new_user)
             }
         }
-        registerBtn.isHidden = false
-        spinner.isHidden = true
     }
     
     func regAddition(user:User){
         Model.instance.register(user:user){(success) in
-            if(!success){
-                showMsg("Registration failed")
+            if (success) {
+                self.spinner.isHidden = true
+                self.registerBtn.isHidden = false
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+            else{
+                self.showMsg("Registration failed")
             }
         }
     }
