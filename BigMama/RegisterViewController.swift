@@ -51,7 +51,11 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         spinner.isHidden = false
         
         let error = validateFields()
-        if error != nil { showMsg(error!) }
+        if error != nil { showMsg(error!)
+            self.spinner.isHidden = true
+            self.registerBtn.isHidden = false
+            self.imageBtn.isEnabled = true
+        }
         else{
             let new_user = User(name: nameTv.text!, email: emailTv.text!, pwd: pwdTv.text!)
             guard let selectedImage = selectedImage else {
@@ -64,6 +68,7 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
                 self.regAddition(user: new_user)
             }
         }
+        
     }
     
     func regAddition(user:User){
@@ -84,6 +89,10 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
             emailTv.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             pwdTv.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             return "Please fill in all fields"
+        }
+        let passwordCheck = NSPredicate(format: "SELF MATCHES %@", "(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}")
+        if !passwordCheck.evaluate(with: pwdTv.text){
+            return "Check your password contains 8 digits, at least one upper case and one lower case"
         }
         return nil
     }
