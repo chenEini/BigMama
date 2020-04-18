@@ -95,7 +95,9 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         {
             self.navigationController?.popToRootViewController(animated: true)
         }
-        else{
+        else {
+            let recipesVC = (self.tabBarController?.viewControllers![0])! as! UINavigationController
+            recipesVC.popToRootViewController(animated: true)
             self.tabBarController?.selectedIndex = 0;
         }
     }
