@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class RecipesFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -39,7 +40,9 @@ class RecipesFeedViewController: UIViewController, UITableViewDelegate, UITableV
         
         cell.userName.text = recipe.ownerName
         cell.recipeTitle.text = recipe.title
-        cell.recipeImg.kf.setImage(with: URL(string: recipe.image));
+        cell.recipeImg.image = UIImage(named: "recipe")
+        
+        if recipe.image != "" { cell.recipeImg.kf.setImage(with: URL(string: recipe.image)) }
         
         return cell
     }

@@ -83,7 +83,9 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         let recipe = data[indexPath.row]
         
         cell.recipeTitle.text = recipe.title
-        cell.recipeImg.kf.setImage(with: URL(string: recipe.image));
+        cell.recipeImg.image = UIImage(named: "recipe")
+    
+        if recipe.image != "" { cell.recipeImg.kf.setImage(with: URL(string: recipe.image)) }
         
         return cell
     }
