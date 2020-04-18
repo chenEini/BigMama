@@ -20,21 +20,19 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad(){
         super.viewDidLoad()
         
+        ModelEvents.LoggingStateChangeEvent.observe {
+            self.initUserData()
+        }
+        
         ModelEvents.RecipesDataEvent.observe {
             self.getUserRecipes()
         }
-
-        getUserRecipes()
+        
+        initUserData()
     }
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated);
-        self.userName.text = Model.instance.getCurrentUserName()
-
-        let userAvatar = Model.instance.getCurrentUserAvatar()
-        if userAvatar != "" { avatar.kf.setImage(with: URL(string: userAvatar)) }
-        else { avatar.image = UIImage(named: "avatar") }
-        
         
         if(!Model.instance.isLoggedIn()){
             let loginVc = LoginViewController.factory()
@@ -55,9 +53,18 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.tabBarController?.selectedIndex = 0;
     }
     
+    func initUserData(){
+        userName.text = Model.instance.getCurrentUserName()
+        let userAvatar = Model.instance.getCurrentUserAvatar()
+        if userAvatar != "" { avatar.kf.setImage(with: URL(string: userAvatar)) }
+        else { avatar.image = UIImage(named: "avatar") }
+        
+        getUserRecipes()
+    }
+    
     @IBAction func logout(_ sender: UIButton){
         Model.instance.logOut(){(success) in
-            if (success) { onLogOut() }
+            if (success) { self.onLogOut() }
         }
     }
     
@@ -84,7 +91,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
         cell.recipeTitle.text = recipe.title
         cell.recipeImg.image = UIImage(named: "recipe")
-    
+        
         if recipe.image != "" { cell.recipeImg.kf.setImage(with: URL(string: recipe.image)) }
         
         return cell
