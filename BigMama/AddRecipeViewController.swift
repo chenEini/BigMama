@@ -75,7 +75,10 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         
         if (recipe == nil){
             recipe = Recipe(ownerId:Model.instance.getCurrentUserId());
-            recipe?.ownerName = Model.instance.getCurrentUserName()
+            //recipe?.ownerName = Model.instance.getCurrentUserName()
+            Model.instance.getCurrentUserName(){(username) in
+                self.recipe?.ownerName = username
+            }
         }
         
         recipe?.title = recipeTitle.text!

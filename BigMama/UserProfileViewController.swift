@@ -19,7 +19,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        userName.text = Model.instance.getCurrentUserName()
         avatar.image = UIImage(named: "avatar")
 //        if (currentUser?.avatar != "")
 //        {
@@ -30,7 +29,12 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
               self.getUserRecipes()
           }
           
-          getUserRecipes()
+        Model.instance.getCurrentUserName(){(username) in
+            print(username)
+            self.userName.text = username
+        }
+        
+        getUserRecipes()
     }
     
     override func viewDidAppear(_ animated: Bool){
@@ -44,7 +48,9 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func onLoginSuccess(){
-        userName.text = Model.instance.getCurrentUserName()
+        Model.instance.getCurrentUserName(){(username) in
+            self.userName.text = username
+        }
         self.recipeTableView.reloadData()
     }
     

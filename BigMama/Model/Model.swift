@@ -18,12 +18,40 @@ class Model {
     
     private init(){}
     
+    func getcurrentUser(callback:@escaping (User) -> Void){
+        modelFirebase.getCurrentUserData(){ (userJson) in
+            if !userJson.isEmpty {
+                callback(User(json:userJson))
+            }
+        }
+    }
+    
     func getCurrentUserId()->String{
         return modelFirebase.getCurrentUserId()
     }
     
-    func getCurrentUserName()->String{
-        return modelFirebase.getCurrentUserName()
+    func getCurrentUserName(callback:@escaping (String)->Void){
+        modelFirebase.getCurrentUserData(){ (user) in
+            if !user.isEmpty {
+                if user["name"] != nil
+                {
+                    callback(user["name"] as! String)
+                }
+            callback("")
+            }
+        }
+    }
+    
+    func getCurrentUserAvatar(callback:@escaping (String)->Void){
+        modelFirebase.getCurrentUserData(){ (user) in
+            if !user.isEmpty {
+                if user["avatar"] != nil
+                {
+                    callback(user["avatar"] as! String)
+                }
+            callback("")
+            }
+        }
     }
     
     func upsertRecpie(recipe:Recipe){
