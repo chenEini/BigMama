@@ -109,6 +109,7 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func showMsg(_ message:String){
+        msgLabel.isHidden = false
         msgLabel.text = message
         msgLabel.alpha = 1
     }
