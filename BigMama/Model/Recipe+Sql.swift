@@ -87,10 +87,10 @@ extension Recipe{
         var sqlite3_stmt: OpaquePointer? = nil
         var data = [Recipe]()
         
-        if (sqlite3_prepare_v2(ModelSql.instance.database,"SELECT * from RECIPES WHERE O_ID=?;",-1,&sqlite3_stmt,nil)
-            == SQLITE_OK){
+        if (sqlite3_prepare_v2(ModelSql.instance.database,"SELECT * FROM RECIPES WHERE O_ID = ?;",-1,&sqlite3_stmt,nil) == SQLITE_OK){
             
-            sqlite3_bind_text(sqlite3_stmt, 1, uid,-1,nil);
+            let ownerId = uid.cString(using: .utf8)
+            sqlite3_bind_text(sqlite3_stmt, 1, ownerId,-1,nil);
             
             while(sqlite3_step(sqlite3_stmt) == SQLITE_ROW){
                 
