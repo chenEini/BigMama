@@ -29,8 +29,8 @@ class RecipeViewController: UIViewController {
         
         userName.text = recipe?.ownerName
         recipeTitle.text = recipe?.title
-        recipeImg.kf.setImage(with: URL(string: recipe!.image));
         recipeSteps.text = recipe?.steps
+        recipeImg.kf.setImage(with: URL(string: recipe!.image));
     }
     
     @IBAction func editRecipe(_ sender: Any) {

@@ -16,8 +16,6 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var msgLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
-    
-    
     override func viewDidLoad(){
         super.viewDidLoad()
         
@@ -62,17 +60,17 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
             }
         }
     }
-      
+    
     func regAddition(user:User){
         Model.instance.register(user:user){(success) in
-        if(success){
-            self.navigationController?.popViewController(animated: true)
-            self.navigationController?.popViewController(animated: true)
-        }
-        else
-        {
-            showMsg("Registration failed")
-        }}
+            if(success){
+                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popViewController(animated: true)
+            }
+            else
+            {
+                showMsg("Registration failed")
+            }}
     }
     
     func validateFields() -> String?{

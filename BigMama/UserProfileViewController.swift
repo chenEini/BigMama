@@ -20,19 +20,14 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        avatar.image = UIImage(named: "avatar")
-        //        if (currentUser?.avatar != "")
-        //        {
-        //            avatar.kf.setImage(with: URL(string: currentUser!.avatar));
-        //        }
+        self.userName.text = Model.instance.getCurrentUserName()
+        
+        let userAvatar = Model.instance.getCurrentUserAvatar()
+        if userAvatar != "" { avatar.kf.setImage(with: URL(string: userAvatar)) }
+        else { avatar.image = UIImage(named: "avatar") }
         
         ModelEvents.RecipesDataEvent.observe {
-              self.getUserRecipes()
-          }
-          
-        Model.instance.getCurrentUserName(){(username) in
-            print(username)
-            self.userName.text = username
+            self.getUserRecipes()
         }
         
         getUserRecipes()
@@ -49,9 +44,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func onLoginSuccess(){
-        Model.instance.getCurrentUserName(){(username) in
-            self.userName.text = username
-        }
         self.recipeTableView.reloadData()
     }
     

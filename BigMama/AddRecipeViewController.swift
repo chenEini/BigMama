@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate, LoginViewControllerDelegate {
     
@@ -19,34 +20,35 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
     
     var recipe:Recipe?
     
-    func onLoginSuccess() {
-    }
-    
-    func onLoginCancell() {
-        self.tabBarController?.selectedIndex = 0;
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         spinner.isHidden = true
-
+        
         if (recipe != nil)
         {
             recipeTitle.text = recipe?.title
-            imageView.image = UIImage(named: "maffin") // TEMP
             recipeSteps.text = recipe?.steps
+            imageView.kf.setImage(with: URL(string: recipe!.image));
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
+        
         // if not logged in: go to login page
         if(!Model.instance.isLoggedIn()){
             let loginVc = LoginViewController.factory()
             loginVc.delegate = self
             show(loginVc, sender: self)
         }
+    }
+    
+    func onLoginSuccess() {
+    }
+    
+    func onLoginCancell() {
+        self.tabBarController?.selectedIndex = 0;
     }
     
     var selectedImage:UIImage?;
@@ -69,16 +71,12 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
     
     @IBAction func save(_ sender: Any) {
         spinner.isHidden = false
-
         saveBtn.isEnabled = false;
         imageBtn.isEnabled = false;
         
         if (recipe == nil){
-            recipe = Recipe(ownerId:Model.instance.getCurrentUserId());
-            //recipe?.ownerName = Model.instance.getCurrentUserName()
-            Model.instance.getCurrentUserName(){(username) in
-                self.recipe?.ownerName = username
-            }
+            recipe = Recipe(ownerId:Model.instance.getCurrentUserId())
+            recipe?.ownerName = Model.instance.getCurrentUserName()
         }
         
         recipe?.title = recipeTitle.text!

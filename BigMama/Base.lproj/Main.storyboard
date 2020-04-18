@@ -396,8 +396,8 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="recipeImg" destination="Hih-CE-hbI" id="vae-Ty-Nrd"/>
                                             <outlet property="recipeTitle" destination="zar-js-0tG" id="fqs-A0-IU7"/>
-                                            <outlet property="recpieImg" destination="Hih-CE-hbI" id="mtM-OV-iXP"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -585,7 +585,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Lhe-hQ-8rx"/>
+        <segue reference="QIN-jP-nOW"/>
         <segue reference="iNZ-GF-lHc"/>
     </inferredMetricsTieBreakers>
     <resources>

@@ -38,8 +38,8 @@ class RecipesFeedViewController: UIViewController, UITableViewDelegate, UITableV
         let recipe = data[indexPath.row]
         
         cell.userName.text = recipe.ownerName
-        cell.recipeImg.kf.setImage(with: URL(string: recipe.image));
         cell.recipeTitle.text = recipe.title
+        cell.recipeImg.kf.setImage(with: URL(string: recipe.image));
         
         return cell
     }

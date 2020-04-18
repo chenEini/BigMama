@@ -37,8 +37,6 @@ class LoginViewController: UIViewController {
     }
     
     @objc func back(sender: UIBarButtonItem) {
-        //performSegue(withIdentifier: "cancelLoginSegue", sender: self)
-        //self.navigationController?.popViewController(animated: true);
         self.navigationController?.popViewController(animated: true);
         if let delegate = delegate{
             delegate.onLoginCancell()
@@ -53,7 +51,7 @@ class LoginViewController: UIViewController {
         else{
             Model.instance.logIn(email: emailTv.text!, pwd: pwdTv.text!){(success) in
                 if(success){
-                //go back when logged in
+                    //go back when logged in
                     self.navigationController?.popViewController(animated: true)
                     if let delegate = delegate{
                         delegate.onLoginSuccess()
@@ -77,14 +75,5 @@ class LoginViewController: UIViewController {
     func showMsg(_ message:String){
         msgLabel.text = message
         msgLabel.alpha = 1
-    }
-
-    //   override func viewDidAppear(_ animated: Bool) {
-    //       super.viewDidAppear(animated)
-    //   }
-    
-    //   override func viewWillAppear(_ animated: Bool) {
-    //       super.viewWillAppear(animated)
-    //   }
-    
+    }    
 }

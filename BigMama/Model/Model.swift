@@ -18,40 +18,16 @@ class Model {
     
     private init(){}
     
-    func getcurrentUser(callback:@escaping (User) -> Void){
-        modelFirebase.getCurrentUserData(){ (userJson) in
-            if !userJson.isEmpty {
-                callback(User(json:userJson))
-            }
-        }
-    }
-    
-    func getCurrentUserId()->String{
+    func getCurrentUserId() -> String{
         return modelFirebase.getCurrentUserId()
     }
     
-    func getCurrentUserName(callback:@escaping (String)->Void){
-        modelFirebase.getCurrentUserData(){ (user) in
-            if !user.isEmpty {
-                if user["name"] != nil
-                {
-                    callback(user["name"] as! String)
-                }
-            callback("")
-            }
-        }
+    func getCurrentUserName () -> String{
+        return modelFirebase.getCurrentUserName()
     }
     
-    func getCurrentUserAvatar(callback:@escaping (String)->Void){
-        modelFirebase.getCurrentUserData(){ (user) in
-            if !user.isEmpty {
-                if user["avatar"] != nil
-                {
-                    callback(user["avatar"] as! String)
-                }
-            callback("")
-            }
-        }
+    func getCurrentUserAvatar () -> String{
+        return modelFirebase.getCurrentUserAvatar()
     }
     
     func upsertRecpie(recipe:Recipe){
@@ -63,8 +39,12 @@ class Model {
         recipe.deleteFromDb()
     }
     
+    func getUserRecipes(callback:@escaping ([Recipe]?)->Void){
+        let finalData = Recipe.getUserRecipesFromDb(uid: self.getCurrentUserId())
+        callback(finalData);
+    }
+    
     func getAllRecipes(callback:@escaping ([Recipe]?)->Void){
-        //get the last update date
         let recipesLastUpdate = Recipe.getLastUpdateDate();
         
         modelFirebase.getAllRecipes(since:recipesLastUpdate) { (data) in
@@ -74,22 +54,13 @@ class Model {
                 if recipe.lastUpdate! > lastUpdate {lastUpdate = recipe.lastUpdate!}
             }
             
-            // update the recipes local last update date
             Recipe.setLastUpdate(lastUpdated: lastUpdate)
-           
-            ModelEvents.RecipesDataEvent.post();
-
-            // get the complete recipe list
-            let finalData = Recipe.getAllRecipesFromDb()
             
+            ModelEvents.RecipesDataEvent.post();
+            
+            let finalData = Recipe.getAllRecipesFromDb()
             callback(finalData);
         }
-    }
-    
-    func getUserRecipes(callback:@escaping ([Recipe]?)->Void){
-        // get the user recipes list
-        let finalData = Recipe.getUserRecipesFromDb(uid: self.getCurrentUserId())
-        callback(finalData);
     }
     
     func saveImage(image:UIImage, callback:@escaping (String)->Void) {
@@ -97,6 +68,10 @@ class Model {
     }
     
     //* Handle User Authentication *//
+    
+    func isLoggedIn()->Bool {
+        return modelFirebase.isLoggedIn()
+    }
     
     func logIn(email:String, pwd:String, callback:(Bool)->Void){
         modelFirebase.signIn(email: email, pwd: pwd) {(success) in
@@ -114,10 +89,6 @@ class Model {
             }
             else {callback(false)}
         }
-    }
-    
-    func isLoggedIn()->Bool {
-        return modelFirebase.isLoggedIn()
     }
     
     func register(user:User, callback:(Bool)->Void){

@@ -13,31 +13,22 @@ class ModelFirebase {
     
     lazy var db = Firestore.firestore()
     
-    func getCurrentUserData(callback: @escaping ([String:Any]) -> Void){
-        let uid = getCurrentUserId()
-        let db = Firestore.firestore()
-        db.collection("users").whereField("uid", isEqualTo: uid).getDocuments(){ (snapshot, err) in
-            if let err = err{
-                print("Error getting documents: \(err)")
-                callback([:])
-            }
-            else{
-                for document in snapshot!.documents {
-                    var json = document.data()
-                    json["id"] = document.documentID
-                    let user = User(json: json)
-                    //print(user.name)
-                    callback(user.toJson())
-                }
-            }
-        }
+    func getCurrentUserId() -> String{
+        return Auth.auth().currentUser?.uid ?? ""
     }
     
-    func getCurrentUserId()->String{
-        let uid = Auth.auth().currentUser?.uid ?? ""
-        return uid
+    func getCurrentUserName() -> String{
+        return Auth.auth().currentUser?.displayName ?? ""
     }
-        
+    
+    func getCurrentUserAvatar() -> String{
+        return Auth.auth().currentUser?.photoURL?.absoluteString ?? ""
+    }
+    
+    func isLoggedIn() -> Bool {
+        return (Auth.auth().currentUser) != nil
+    }
+    
     func registerUser(user:User, callback:(Bool)->Void){
         var error=""
         Auth.auth().createUser(withEmail: user.email, password: user.pwd){ (result,err) in
@@ -46,6 +37,12 @@ class ModelFirebase {
                 error = "Error creating user"
             }
             else {
+                let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                changeRequest?.displayName = user.name
+                changeRequest?.photoURL = URL(string: user.avatar)
+                changeRequest?.commitChanges { (err) in
+                    if let err = err {print("Error creating user: \(err)")}                    
+                }
                 self.addUser(user: user, uid:result!.user.uid)
             }
         }
@@ -73,10 +70,6 @@ class ModelFirebase {
             error = "Error signing out"
         }
         error != "" ? callback(false) : callback(true)
-    }
-    
-    func isLoggedIn() -> Bool {
-        return (Auth.auth().currentUser) != nil
     }
     
     func addUser(user:User, uid:String){
