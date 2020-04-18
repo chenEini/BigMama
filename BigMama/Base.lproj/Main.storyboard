@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xuv-sV-LZ3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xuv-sV-LZ3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -270,19 +270,25 @@
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="EA4-CZ-Tbq">
+                                <rect key="frame" x="95" y="455" width="42" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="EsI-G8-Z45"/>
                     </view>
                     <connections>
                         <outlet property="emailTv" destination="GE6-BE-hjM" id="mgh-sg-abT"/>
+                        <outlet property="loginBtn" destination="Xdf-5g-4zI" id="dOF-54-G0x"/>
                         <outlet property="msgLabel" destination="Fn4-Js-1Km" id="nAL-1z-0YM"/>
                         <outlet property="pwdTv" destination="rPy-Bx-l99" id="nx6-fQ-l7n"/>
+                        <outlet property="spinner" destination="EA4-CZ-Tbq" id="bie-BD-iSX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KHJ-fk-uYe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-797" y="1027"/>
+            <point key="canvasLocation" x="-797.10144927536237" y="1026.5625"/>
         </scene>
         <!--Register-->
         <scene sceneID="VU5-Io-ZLj">
@@ -341,6 +347,10 @@
                                 <rect key="frame" x="66" y="50" width="270" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="EWS-rJ-j9k">
+                                <rect key="frame" x="180" y="612" width="42" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="JJa-sl-os6"/>
@@ -348,15 +358,18 @@
                     <navigationItem key="navigationItem" id="TwJ-fZ-GgL"/>
                     <connections>
                         <outlet property="emailTv" destination="Flh-Ot-Rxm" id="M7H-Mv-kRJ"/>
+                        <outlet property="imageBtn" destination="ylY-5f-91y" id="iqc-cc-k6P"/>
                         <outlet property="imageView" destination="ort-3Z-OEe" id="LMj-pF-E3A"/>
                         <outlet property="msgLabel" destination="Udd-ez-vTt" id="RBd-ce-z75"/>
                         <outlet property="nameTv" destination="7N7-0y-5ce" id="A5S-h9-Sdm"/>
                         <outlet property="pwdTv" destination="7eB-5t-gl0" id="Vql-WZ-ZvS"/>
+                        <outlet property="registerBtn" destination="JQL-fP-8h8" id="Trw-0s-nyt"/>
+                        <outlet property="spinner" destination="EWS-rJ-j9k" id="q5M-yM-W2X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zvr-gk-td0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="67" y="1027"/>
+            <point key="canvasLocation" x="66.666666666666671" y="1026.5625"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Ooi-5V-W11">
@@ -584,16 +597,16 @@
             <point key="canvasLocation" x="-797" y="-320"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AppLogo" width="555" height="440"/>
+        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
+        <image name="person.crop.circle" catalog="system" width="64" height="60"/>
+        <image name="square.and.pencil" catalog="system" width="64" height="58"/>
+        <image name="square.grid.2x2.fill" catalog="system" width="64" height="56"/>
+        <image name="trash" catalog="system" width="60" height="64"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="QIN-jP-nOW"/>
         <segue reference="iNZ-GF-lHc"/>
     </inferredMetricsTieBreakers>
-    <resources>
-        <image name="AppLogo" width="555" height="440"/>
-        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="81"/>
-        <image name="person.crop.circle" catalog="system" width="128" height="121"/>
-        <image name="square.and.pencil" catalog="system" width="128" height="118"/>
-        <image name="square.grid.2x2.fill" catalog="system" width="128" height="114"/>
-        <image name="trash" catalog="system" width="121" height="128"/>
-    </resources>
 </document>

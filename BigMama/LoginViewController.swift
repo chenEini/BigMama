@@ -19,6 +19,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTv: UITextField!
     @IBOutlet weak var pwdTv: UITextField!
     @IBOutlet weak var msgLabel: UILabel!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var loginBtn: UIButton!
     
     static func factory()->LoginViewController{
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginViewController")
@@ -27,6 +29,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        spinner.isHidden = true
         pwdTv.isSecureTextEntry = true
         msgLabel.alpha = 0
         
@@ -51,8 +54,10 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func login(_ sender: UIButton) {
+        loginBtn.isHidden = true
+        spinner.isHidden = false
+        
         let error = validateFields()
-    
         if error != nil{
             showMsg(error!)
         }
@@ -63,6 +68,8 @@ class LoginViewController: UIViewController {
                 }
             }
         }
+        loginBtn.isHidden = false
+        spinner.isHidden = true
     }
     
     func validateFields() -> String?{

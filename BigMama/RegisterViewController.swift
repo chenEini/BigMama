@@ -13,12 +13,17 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var nameTv: UITextField!
     @IBOutlet weak var emailTv: UITextField!
     @IBOutlet weak var pwdTv: UITextField!
+    @IBOutlet weak var registerBtn: UIButton!
+    @IBOutlet weak var imageBtn: UIButton!
     @IBOutlet weak var msgLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     
     override func viewDidLoad(){
         super.viewDidLoad()
         
+        spinner.isHidden = true
         pwdTv.isSecureTextEntry = true
         msgLabel.alpha = 0
         
@@ -47,6 +52,9 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func register(_ sender: UIButton){
+        imageBtn.isEnabled = false
+        registerBtn.isHidden = true
+        spinner.isHidden = false
         
         let error = validateFields()
         if error != nil{
@@ -64,6 +72,8 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
                 self.regAddition(user: new_user)
             }
         }
+        registerBtn.isHidden = false
+        spinner.isHidden = true
     }
     
     func regAddition(user:User){
