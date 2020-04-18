@@ -13,16 +13,31 @@ class ModelFirebase {
     
     lazy var db = Firestore.firestore()
     
+    func getCurrentUserData(callback: @escaping ([String:Any]) -> Void){
+        let uid = getCurrentUserId()
+        let db = Firestore.firestore()
+        db.collection("users").whereField("uid", isEqualTo: uid).getDocuments(){ (snapshot, err) in
+            if let err = err{
+                print("Error getting documents: \(err)")
+                callback([:])
+            }
+            else{
+                for document in snapshot!.documents {
+                    var json = document.data()
+                    json["id"] = document.documentID
+                    let user = User(json: json)
+                    //print(user.name)
+                    callback(user.toJson())
+                }
+            }
+        }
+    }
+    
     func getCurrentUserId()->String{
         let uid = Auth.auth().currentUser?.uid ?? ""
         return uid
     }
-    
-    func getCurrentUserName()->String{
-        let name = Auth.auth().currentUser?.displayName ?? "default user name"
-        return name
-    }
-    
+        
     func registerUser(user:User, callback:(Bool)->Void){
         var error=""
         Auth.auth().createUser(withEmail: user.email, password: user.pwd){ (result,err) in
