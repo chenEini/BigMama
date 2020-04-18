@@ -51,6 +51,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     func onLogOut(){
         self.tabBarController?.selectedIndex = 0;
+        self.clearUserData()
     }
     
     func initUserData(){
@@ -60,6 +61,13 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         else { avatar.image = UIImage(named: "avatar") }
         
         getUserRecipes()
+    }
+    
+    func clearUserData(){
+        self.data = [Recipe]()
+        self.recipeTableView.reloadData()
+        self.userName.text = ""
+        self.avatar.image = nil
     }
     
     @IBAction func logout(_ sender: UIButton){
