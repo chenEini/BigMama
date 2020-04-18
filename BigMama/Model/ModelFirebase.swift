@@ -113,9 +113,7 @@ class ModelFirebase {
     }
     
     func getAllRecipes(since:Int64, callback: @escaping ([Recipe]?)->Void){
-        let db = Firestore.firestore()
-        db.collection("recipes")
-            .order(by:"lastUpdate")
+        db.collection("recipes").order(by:"lastUpdate")
             .start(at:[Timestamp(seconds: since, nanoseconds: 0)])
             .addSnapshotListener{(querySnapshot, err) in
                 if let err = err
@@ -125,6 +123,15 @@ class ModelFirebase {
                 }
                 else
                 {
+                    querySnapshot!.documentChanges.forEach { diff in
+                        if (diff.type == .removed) {
+                            var json = diff.document.data()
+                            json["id"] = diff.document.documentID
+                            let r = Recipe(json: json);
+                            r.deleteFromDb()
+                        }
+                    }
+                    
                     var data = [Recipe]();
                     for document in querySnapshot!.documents {
                         if !document.metadata.hasPendingWrites {
