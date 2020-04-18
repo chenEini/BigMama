@@ -21,6 +21,11 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         
         pwdTv.isSecureTextEntry = true
         msgLabel.alpha = 0
+        
+        ModelEvents.RegisterStateChangeEvent.observe {
+            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     var selectedImage:UIImage?
@@ -63,14 +68,10 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func regAddition(user:User){
         Model.instance.register(user:user){(success) in
-            if(success){
-                self.navigationController?.popViewController(animated: true)
-                self.navigationController?.popViewController(animated: true)
-            }
-            else
-            {
+            if(!success){
                 showMsg("Registration failed")
-            }}
+            }
+        }
     }
     
     func validateFields() -> String?{

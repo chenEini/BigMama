@@ -20,21 +20,21 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        self.userName.text = Model.instance.getCurrentUserName()
-        
-        let userAvatar = Model.instance.getCurrentUserAvatar()
-        if userAvatar != "" { avatar.kf.setImage(with: URL(string: userAvatar)) }
-        else { avatar.image = UIImage(named: "avatar") }
-        
         ModelEvents.RecipesDataEvent.observe {
             self.getUserRecipes()
         }
-        
+
         getUserRecipes()
     }
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated);
+        self.userName.text = Model.instance.getCurrentUserName()
+
+        let userAvatar = Model.instance.getCurrentUserAvatar()
+        if userAvatar != "" { avatar.kf.setImage(with: URL(string: userAvatar)) }
+        else { avatar.image = UIImage(named: "avatar") }
+        
         
         if(!Model.instance.isLoggedIn()){
             let loginVc = LoginViewController.factory()

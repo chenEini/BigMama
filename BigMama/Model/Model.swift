@@ -15,8 +15,11 @@ class Model {
     
     var modelFirebase:ModelFirebase = ModelFirebase()
     var modelFirebaseStorage: FirebaseStorage = FirebaseStorage()
-    
-    private init(){}
+    var loggedIn = false
+
+    private init(){
+        loggedIn = modelFirebase.isLoggedIn()
+    }
     
     func getCurrentUserId() -> String{
         return modelFirebase.getCurrentUserId()
@@ -69,34 +72,51 @@ class Model {
     
     //* Handle User Authentication *//
     
+
     func isLoggedIn()->Bool {
-        return modelFirebase.isLoggedIn()
+        return loggedIn
     }
     
     func logIn(email:String, pwd:String, callback:(Bool)->Void){
         modelFirebase.signIn(email: email, pwd: pwd) {(success) in
             if(success){
+                loggedIn = true
+                ModelEvents.LoggingStateChangeEvent.post();
                 callback(true);
             }
-            else {callback(false)}
+            else {
+                loggedIn = false
+                callback(false)
+                
+            }
         }
     }
     
     func logOut(callback:(Bool)->Void){
         modelFirebase.signOut() {(success) in
             if(success){
+                loggedIn = false
                 callback(true)
             }
-            else {callback(false)}
+            else {
+                loggedIn = true
+                callback(false)
+            }
         }
     }
     
     func register(user:User, callback:(Bool)->Void){
         modelFirebase.registerUser(user: user) {(success) in
             if(success){
+                loggedIn = true
+                ModelEvents.RegisterStateChangeEvent.post();
                 callback(true);
             }
-            else {callback(false)}
+            else {
+                loggedIn = false
+                callback(false)
+                
+            }
         }
     }
 }
@@ -105,6 +125,7 @@ class Model {
 
 class ModelEvents{
     static let LoggingStateChangeEvent = EventNotificationBase(eventName:"LoggingStateChangeEvent");
+    static let RegisterStateChangeEvent = EventNotificationBase(eventName:"RegisterStateChangeEvent");
     static let RecipesDataEvent = EventNotificationBase(eventName:"RecipesDataEvent");
     
     private init(){}

@@ -30,6 +30,13 @@ class LoginViewController: UIViewController {
         pwdTv.isSecureTextEntry = true
         msgLabel.alpha = 0
         
+        ModelEvents.LoggingStateChangeEvent.observe {
+            self.navigationController?.popViewController(animated: true)
+            if let delegate = self.delegate{
+                delegate.onLoginSuccess()
+            }
+        }
+        
         //hook to the navigation back button
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.back(sender:)))
@@ -45,20 +52,14 @@ class LoginViewController: UIViewController {
     
     @IBAction func login(_ sender: UIButton) {
         let error = validateFields()
+    
         if error != nil{
             showMsg(error!)
         }
         else{
             Model.instance.logIn(email: emailTv.text!, pwd: pwdTv.text!){(success) in
-                if(success){
-                    //go back when logged in
-                    self.navigationController?.popViewController(animated: true)
-                    if let delegate = delegate{
-                        delegate.onLoginSuccess()
-                    }
-                }
-                else{
-                    showMsg("Login failed")
+                if(!success){
+                    showMsg("Login Failed")
                 }
             }
         }
