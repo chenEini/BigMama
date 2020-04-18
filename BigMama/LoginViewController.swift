@@ -33,13 +33,6 @@ class LoginViewController: UIViewController {
         pwdTv.isSecureTextEntry = true
         msgLabel.alpha = 0
         
-        ModelEvents.LoggingStateChangeEvent.observe {
-            self.navigationController?.popViewController(animated: true)
-            if let delegate = self.delegate{
-                delegate.onLoginSuccess()
-            }
-        }
-        
         //hook to the navigation back button
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.back(sender:)))
@@ -47,8 +40,8 @@ class LoginViewController: UIViewController {
     }
     
     @objc func back(sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true);
-        if let delegate = delegate{
+        self.navigationController?.popToRootViewController(animated: true)
+        if let delegate = delegate {
             delegate.onLoginCancell()
         }
     }
@@ -62,14 +55,23 @@ class LoginViewController: UIViewController {
             showMsg(error!)
         }
         else{
-            Model.instance.logIn(email: emailTv.text!, pwd: pwdTv.text!){(success) in
-                if(!success){
-                    showMsg("Login Failed")
+            Model.instance.logIn(email: emailTv.text!, pwd: pwdTv.text!){ (success) in
+                
+                if(success){
+                    //go back when the user logged in
+                    self.navigationController?.popToRootViewController(animated: true)
+                    if let delegate = self.delegate{
+                        delegate.onLoginSuccess()
+                    }
                 }
+                else{
+                    self.showMsg("Login failed")
+                }
+                
+                self.loginBtn.isHidden = false
+                self.spinner.isHidden = true
             }
         }
-        loginBtn.isHidden = false
-        spinner.isHidden = true
     }
     
     func validateFields() -> String?{

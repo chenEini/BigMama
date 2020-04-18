@@ -29,35 +29,29 @@ class ModelFirebase {
         return (Auth.auth().currentUser) != nil
     }
     
-    func registerUser(user:User, callback:(Bool)->Void){
+    func registerUser(user:User, callback: @escaping (Bool)->Void){
         var error=""
         Auth.auth().createUser(withEmail: user.email, password: user.pwd){ (result,err) in
-            if let err = err {
-                print("Error creating user: \(err)")
-                error = "Error creating user"
-            }
+            if err != nil { error = "Error creating user" }
             else {
                 let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
                 changeRequest?.displayName = user.name
                 changeRequest?.photoURL = URL(string: user.avatar)
                 changeRequest?.commitChanges { (err) in
-                    if let err = err {print("Error creating user: \(err)")}                    
+                    if err != nil { error = "Error creating user" }
+                    error != "" ? callback(false) : callback(true)
                 }
-                self.addUser(user: user, uid:result!.user.uid)
             }
         }
-        error != "" ? callback(false) : callback(true)
     }
     
-    func signIn(email:String, pwd:String, callback:(Bool)->Void){
+    func signIn(email:String, pwd:String, callback: @escaping (Bool)->Void){
         var error=""
-        Auth.auth().signIn(withEmail: email, password: pwd){
+        Auth.auth().signIn(withEmail: email, password: pwd) {
             (result, err) in
-            if let err = err {
-                error = err.localizedDescription
-            }
+            if let err = err { error = err.localizedDescription }
+            error != "" ? callback(false) : callback(true)
         }
-        error != "" ? callback(false) : callback(true)
     }
     
     func signOut(callback:(Bool)->Void){
@@ -70,14 +64,6 @@ class ModelFirebase {
             error = "Error signing out"
         }
         error != "" ? callback(false) : callback(true)
-    }
-    
-    func addUser(user:User, uid:String){
-        db.collection("users").addDocument(data:["name":user.name, "uid":uid, "avatar":user.avatar]){err in
-            if let err = err {
-                print("Error saving user data: \(err)")
-            }
-        }
     }
     
     func upsertRecpie(recipe:Recipe){
