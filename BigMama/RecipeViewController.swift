@@ -31,7 +31,11 @@ class RecipeViewController: UIViewController {
         userName.text = recipe?.ownerName
         recipeTitle.text = recipe?.title
         recipeSteps.text = recipe?.steps
-        recipeImg.kf.setImage(with: URL(string: recipe!.image));
+        recipeImg.image = UIImage(named: "recipe")
+        if recipe?.image != "" { recipeImg.kf.setImage(with: URL(string: recipe!.image)) }
+        
+        recipeImg.layer.cornerRadius = 4.0
+        recipeImg.layer.masksToBounds = true
     }
     
     @IBAction func editRecipe(_ sender: Any) {

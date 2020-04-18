@@ -12,7 +12,7 @@ import Kingfisher
 class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate, LoginViewControllerDelegate {
     
     @IBOutlet weak var recipeTitle: UITextField!
-    @IBOutlet weak var recipeSteps: UITextField!
+    @IBOutlet weak var recipeSteps: UITextView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageBtn: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
@@ -24,6 +24,10 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
         super.viewDidLoad()
         
         spinner.isHidden = true
+
+        recipeSteps.layer.borderColor = UIColor.lightGray.cgColor
+        recipeSteps.layer.borderWidth = 1.0;
+        recipeSteps.layer.cornerRadius = 4.0;
         
         if (recipe != nil)
         {

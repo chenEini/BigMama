@@ -16,6 +16,8 @@ class RecipeViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        recipeImg.layer.cornerRadius = 4.0
+        recipeImg.layer.masksToBounds = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
