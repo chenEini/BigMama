@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LoginViewControllerDelegate {
     
@@ -21,16 +22,16 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
         userName.text = Model.instance.getCurrentUserName()
         avatar.image = UIImage(named: "avatar")
-//        if (currentUser?.avatar != "")
-//        {
-//            avatar.kf.setImage(with: URL(string: currentUser!.avatar));
-//        }
+        //        if (currentUser?.avatar != "")
+        //        {
+        //            avatar.kf.setImage(with: URL(string: currentUser!.avatar));
+        //        }
         
         ModelEvents.RecipesDataEvent.observe {
-              self.getUserRecipes()
-          }
-          
-          getUserRecipes()
+            self.getUserRecipes()
+        }
+        
+        getUserRecipes()
     }
     
     override func viewDidAppear(_ animated: Bool){
@@ -84,7 +85,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         let recipe = data[indexPath.row]
         
         cell.recipeTitle.text = recipe.title
-        cell.recpieImg.image = UIImage(named: "maffin") // TEMP
+        cell.recipeImg.kf.setImage(with: URL(string: recipe.image));
         
         return cell
     }

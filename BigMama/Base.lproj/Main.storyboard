@@ -71,8 +71,8 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="recipeImg" destination="cdb-8I-KRD" id="TXw-aT-euJ"/>
                                             <outlet property="recipeTitle" destination="ASq-Gm-typ" id="4Lr-ch-Ai0"/>
-                                            <outlet property="recpieImg" destination="cdb-8I-KRD" id="M4c-ew-Z3T"/>
                                             <outlet property="userName" destination="bha-nY-UcY" id="fRl-Sc-pei"/>
                                         </connections>
                                     </tableViewCell>
@@ -579,7 +579,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QIN-jP-nOW"/>
+        <segue reference="Lhe-hQ-8rx"/>
         <segue reference="iNZ-GF-lHc"/>
     </inferredMetricsTieBreakers>
     <resources>

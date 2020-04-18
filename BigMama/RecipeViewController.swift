@@ -29,7 +29,7 @@ class RecipeViewController: UIViewController {
         
         userName.text = recipe?.ownerName
         recipeTitle.text = recipe?.title
-        recipeImg.image = UIImage(named: "maffin") // TEMP
+        recipeImg.kf.setImage(with: URL(string: recipe!.image));
         recipeSteps.text = recipe?.steps
     }
     
