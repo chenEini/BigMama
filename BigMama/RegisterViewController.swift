@@ -49,23 +49,27 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         imageBtn.isEnabled = false
         registerBtn.isHidden = true
         spinner.isHidden = false
+        msgLabel.isHidden = true
         
-        let error = validateFields()
-        if error != nil { showMsg(error!)
-            self.spinner.isHidden = true
-            self.registerBtn.isHidden = false
-            self.imageBtn.isEnabled = true
-        }
-        else{
-            let new_user = User(name: nameTv.text!, email: emailTv.text!, pwd: pwdTv.text!)
-            guard let selectedImage = selectedImage else {
-                self.regAddition(user: new_user)
-                return
+        validateFields(){ (error) in
+            if error != "" {
+                self.showMsg(error!)
+                self.spinner.isHidden = true
+                self.registerBtn.isHidden = false
+                self.imageBtn.isEnabled = true
             }
-            
-            Model.instance.saveImage(image: selectedImage) {(url) in
-                new_user.avatar = url
-                self.regAddition(user: new_user)
+            else{
+                let new_user = User(name: self.nameTv.text!, email: self.emailTv.text!, pwd: self.pwdTv.text!)
+                guard let selectedImage = self.selectedImage
+                    else {
+                        self.regAddition(user: new_user)
+                        return
+                    }
+                
+                Model.instance.saveImage(image: selectedImage) {(url) in
+                    new_user.avatar = url
+                    self.regAddition(user: new_user)
+                }
             }
         }
         
@@ -84,17 +88,24 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         }
     }
     
-    func validateFields() -> String?{
+    func validateFields(callback: @escaping (String?) -> Void){
         if nameTv.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             emailTv.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             pwdTv.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            return "Please fill in all fields"
+            callback("Please fill in all fields")
         }
+        
+        let emailCheck = NSPredicate(format:"SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
+        if !emailCheck.evaluate(with: emailTv.text){
+            callback("Invalid email address")
+        }
+        
         let passwordCheck = NSPredicate(format: "SELF MATCHES %@", "(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}")
         if !passwordCheck.evaluate(with: pwdTv.text){
-            return "Check your password contains 8 digits, at least one upper case and one lower case"
+           callback("Check your password contains 8 digits, at least one upper case and one lower case")
         }
-        return nil
+
+        callback("")
     }
     
     func showMsg(_ message:String){

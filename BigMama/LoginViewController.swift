@@ -49,13 +49,16 @@ class LoginViewController: UIViewController {
     @IBAction func login(_ sender: UIButton) {
         loginBtn.isHidden = true
         spinner.isHidden = false
-        
-        let error = validateFields()
-        if error != nil{
-            showMsg(error!)
-        }
-        else{
-            Model.instance.logIn(email: emailTv.text!, pwd: pwdTv.text!){ (success) in
+        msgLabel.isHidden = true
+
+        validateFields(){ (error) in
+            if error != ""{
+                self.showMsg(error!)
+                self.spinner.isHidden = true
+                
+            }
+            else{
+                Model.instance.logIn(email: self.emailTv.text!, pwd: self.pwdTv.text!){ (success) in
                 
                 if(success){
                     //go back when the user logged in
@@ -71,19 +74,24 @@ class LoginViewController: UIViewController {
                 self.loginBtn.isHidden = false
                 self.spinner.isHidden = true
             }
+            }
         }
     }
     
-    func validateFields() -> String?{
+    func validateFields(callback: @escaping (String?) -> Void){
         if emailTv.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             pwdTv.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            return "Please fill in all fields"
+            callback("Please fill in all fields")
         }
-        return nil
+        else {callback("")}
     }
+
     
     func showMsg(_ message:String){
+        msgLabel.isHidden = false
         msgLabel.text = message
         msgLabel.alpha = 1
-    }    
+        loginBtn.isHidden = false
+        
+    }
 }
