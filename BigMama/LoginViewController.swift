@@ -39,6 +39,14 @@ class LoginViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = newBackButton
     }
     
+    override func viewDidAppear(_ animated: Bool){
+        super.viewDidAppear(animated);
+        
+        if(Model.instance.isLoggedIn()){
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+    }
+    
     @objc func back(sender: UIBarButtonItem) {
         self.navigationController?.popToRootViewController(animated: true)
         if let delegate = delegate {
@@ -50,7 +58,7 @@ class LoginViewController: UIViewController {
         loginBtn.isHidden = true
         spinner.isHidden = false
         msgLabel.isHidden = true
-
+        
         validateFields(){ (error) in
             if error != ""{
                 self.showMsg(error!)
@@ -59,21 +67,21 @@ class LoginViewController: UIViewController {
             }
             else{
                 Model.instance.logIn(email: self.emailTv.text!, pwd: self.pwdTv.text!){ (success) in
-                
-                if(success){
-                    //go back when the user logged in
-                    self.navigationController?.popToRootViewController(animated: true)
-                    if let delegate = self.delegate{
-                        delegate.onLoginSuccess()
+                    
+                    if(success){
+                        //go back when the user logged in
+                        self.navigationController?.popToRootViewController(animated: true)
+                        if let delegate = self.delegate{
+                            delegate.onLoginSuccess()
+                        }
                     }
+                    else{
+                        self.showMsg("Login failed")
+                    }
+                    
+                    self.loginBtn.isHidden = false
+                    self.spinner.isHidden = true
                 }
-                else{
-                    self.showMsg("Login failed")
-                }
-                
-                self.loginBtn.isHidden = false
-                self.spinner.isHidden = true
-            }
             }
         }
     }
@@ -85,7 +93,7 @@ class LoginViewController: UIViewController {
         }
         else {callback("")}
     }
-
+    
     
     func showMsg(_ message:String){
         msgLabel.isHidden = false

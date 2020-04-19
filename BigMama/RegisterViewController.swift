@@ -27,6 +27,14 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         msgLabel.alpha = 0
     }
     
+    override func viewDidAppear(_ animated: Bool){
+        super.viewDidAppear(animated);
+        
+        if(Model.instance.isLoggedIn()){
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+    }
+    
     var selectedImage:UIImage?
     
     @IBAction func image(_ sender: Any) {
