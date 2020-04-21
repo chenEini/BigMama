@@ -113,6 +113,7 @@ class AddRecipeViewController: UIViewController,UIImagePickerControllerDelegate,
     }
     
     func clear(){
+        recipe = nil
         recipeTitle.text = ""
         recipeSteps.text = ""
         imageView.image = nil
